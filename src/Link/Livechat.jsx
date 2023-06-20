@@ -14,6 +14,7 @@ import styled from "styled-components";
 import Chatbox from "./Chatbox";
 import MinChatbox from "./MinChatbox";
 import Backup from "./backup";
+import { CustomerBreakpoint, mmobile } from "../responsive";
 const Container = styled.div`
   position: fixed;
   right: 40px;
@@ -32,6 +33,8 @@ const IconCon = styled.div`
   height: 50px;
   background-color: ${(props) => props.bg};
   margin: 2px 0;
+  ${CustomerBreakpoint({ height: "40px", width: "40px" })};
+  ${mmobile({ width: "30px", height: "30px" })};
 `;
 const AlertCon = styled.div`
    position:fixed;
@@ -56,29 +59,40 @@ const [msg, setmsg] = useState([
         <Wrapper className="flex aic jcc fdc">
           {showIcon && (
             <IconCon bg="orangered">
-              <CommentBankOutlined />
+              <CommentBankOutlined id="FooterIcons" />
             </IconCon>
           )}
           {showIcon && (
             <IconCon bg="orangered">
-              <SupportAgent onClick={() => setShowChatbox(true)} />
+              <SupportAgent
+                id="FooterIcons"
+                onClick={() => setShowChatbox(true)}
+              />
             </IconCon>
           )}
           <IconCon bg="orangered" className="fdc" wd="">
             {showIcon ? (
-              <Close onClick={() => setShowIcon(false)} />
+              <Close id="FooterIcons" onClick={() => setShowIcon(false)} />
             ) : (
-              <SupportAgent onClick={() => setShowIcon(true)} />
+              <SupportAgent
+                id="FooterIcons"
+                onClick={() => setShowIcon(true)}
+              />
             )}
           </IconCon>
         </Wrapper>
       ) : (
         <>
-        {showChatbox == 'min' ? 
-      <MinChatbox setShowChatbox={setShowChatbox} />
-      :
-        <Chatbox msg={msg} setmsg={setmsg} showChatbox={showChatbox} setShowChatbox={setShowChatbox} />
-      }
+          {showChatbox == "min" ? (
+            <MinChatbox setShowChatbox={setShowChatbox} />
+          ) : (
+            <Chatbox
+              msg={msg}
+              setmsg={setmsg}
+              showChatbox={showChatbox}
+              setShowChatbox={setShowChatbox}
+            />
+          )}
         </>
       )}
     </Container>

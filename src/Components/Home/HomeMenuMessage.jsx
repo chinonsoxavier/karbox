@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
+import { lmobile, mmobile, mobile } from '../../responsive';
 const Container = styled.div`
   width: 100%;
   color:white;
@@ -10,12 +11,14 @@ const Wrapper = styled.div`
   background: linear-gradient(.25turn,#D355AB,50%,#9373D9);
 `;
 const BigText = styled.p`
-   font-size:25px
-`
+  font-size: 25px;
+  ${lmobile({ fontSize: "18px" })};
+`;
 const Text = styled.p`
-  max-width:80%;
-  margin-top:-15px;
-`
+  max-width: 80%;
+  margin-top: -15px;
+  ${lmobile({ fontSize: "10px" })};
+`;
 
 const WhyChooseUsCon = styled.div``
 const WhyChooseUs = styled.div``
@@ -23,24 +26,29 @@ const WhyChooseUsHeader = styled.div``
 const WhyChooseUsHeaderText = styled.p`
    font-size:33px;
    font-weight:600;
+   ${mmobile({fontSize:'23px'})}
 `
 
 const WhyChooseUsOption = styled.div`
   max-width: 270px;
+  ${lmobile({ maxWidth: "200px" })};
   margin: 20px 0;
   padding: 20px 25px;
   border-radius: 9px;
   animation-duration: 1s;
-  transition:2s ease in out;
+  transition: 2s ease in out;
 `;
 const WhyChooseUsOptionImg = styled.img`
-width:80%;
-`
+  width: 80%;
+  ${lmobile({ width: "60%" })};
+`;
 const WhyChooseUsOptionText = styled.p`
-font-size:18px;
-`
+  font-size: 18px;
+  ${lmobile({ fontSize: "15px" })};
+`;
 const WhyChooseUsHeaderSmText = styled.p`
   font-size: 12px;
+  ${lmobile({ fontSize: "10px" })};
   text-align: center;
 `;
 
@@ -98,7 +106,7 @@ const [hovered,setHovered]=useState()
         <WhyChooseUsHeader className="flex aic jcc">
           <WhyChooseUsHeaderText>Why Choose Karbox</WhyChooseUsHeaderText>
         </WhyChooseUsHeader>
-        <WhyChooseUs className="flex aic jcsa">
+        <WhyChooseUs className="flex aic jcsa wrap">
           {data.map((item, i) => (
             <WhyChooseUsOption
             key={i}

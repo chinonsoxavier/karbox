@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { Link } from "react-router-dom";
+import { mmobile } from "../../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -14,6 +15,7 @@ const Wrapper = styled.div`width:100%;`;
 const Header = styled.div``;
 const HeaderText = styled.h3`
   font-size: 30px;
+  ${mmobile({fontSize:'20px'})}
 `;
 
 const SlidesImg = styled.img` 
@@ -21,9 +23,10 @@ width:80%;
 border-radius:10px;
 `
 const SlidesText = styled.span`
-color:white;
-height:30px;
-`
+  color: white;
+  height: 30px;
+  ${mmobile({ fontSize: "13px" })}
+`;
 
 const ButtonCon = styled.div`
   font-weight: 500;
@@ -87,7 +90,7 @@ const slide = [
           <HeaderText>Top-rated cars by type</HeaderText>
         </Header>
         <Swiper
-          slidesPerView={7}
+          slidesPerView='auto'
           spaceBetween={15}
           navigation={true}
           modules={[Navigation]}
@@ -95,15 +98,20 @@ const slide = [
         >
           {slide.map((item, i) => (
             <SwiperSlide
-                key={i}
-                id="shopType"
-                className="flex aic jcc fdc w100"
-              >
-            <Link className="link w100" to={`/inventory/?type=${item.name}`}>
+              style={{
+                maxWidth: "15%",
+                width: "100%",
+                minWidth: "70px",
+              }}
+              key={i}
+              id="shopType"
+              className="flex aic jcc fdc w100"
+            >
+              <Link className="link w100" to={`/inventory/?type=${item.name}`}>
                 <SlidesImg src={item.img} />
                 <SlidesText>{item.name}</SlidesText>
-            </Link>
-              </SwiperSlide>
+              </Link>
+            </SwiperSlide>
           ))}
         </Swiper>
         <ButtonCon className="flex aic jcc w100">

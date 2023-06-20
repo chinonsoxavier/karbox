@@ -6,7 +6,8 @@ import Header from '../Components/Home/Header'
 import HomeMenu from "../Components/Home/HomeMenu";
 import Footer from "../Components/Home/Footer";
 import MobileHeader from "../Components/Home/MobileHeader";
-import { Laptop, mobile, tablet } from "../responsive";
+import MobileBottom from "../Components/Home/MobileBottom";
+import { Laptop, lmobile, mobile, tablet } from "../responsive";
 import HomeMenuMessage from "../Components/Home/HomeMenuMessage";
 import Find from "../Components/Home/Find";
 import Brands from "../Components/Home/Brands";
@@ -23,8 +24,6 @@ const Container = styled.div`
     padding: 0 14vh;
     width: 100%;
     ${tablet({ padding: "0 4vh" })}
-    ${Laptop({ padding: "0 4vh" })}
-    ${mobile({ padding: "0 4vh" })}
   box-sizing: border-box;
   `;
 
@@ -41,17 +40,15 @@ const HeaderCon = styled.div`
     box-sizing:border-box;
 `;
 const MobileHeaderCon = styled.div`
-  position:sticky;
-  top:0;
-  z-index:200;
-`
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: black;
+`;
 const HomeContainer = styled.div``
 
 const Wrapper = styled.div``;
 const FooterCon = styled.div`
-  ${tablet({ padding: "0 4vh" })}
-  ${Laptop({ padding: "0 4vh" })}
-    ${mobile({ padding: "0 4vh" })}
     box-sizing:border-box;
   background: url(./footer-bg.jpg);
   background-repeat: no-repeat;
@@ -64,6 +61,7 @@ function Home({ route,menu,setMenu }) {
     <Container>
       <MobileHeaderCon>
             <MobileHeader menu={menu} setMenu={setMenu} />
+            <MobileBottom/>
       </MobileHeaderCon>
         <HomeContainer>
 

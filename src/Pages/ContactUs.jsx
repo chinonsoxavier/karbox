@@ -6,10 +6,11 @@ import Button from "../Components/Home/Button";
 import ManagementTeam from "../Components/AboutUs/ManagementTeam";
 import Footer from "../Components/Home/Footer";
 import Contact from "../Components/ContactUs/Contact";
-import { useState, useEffect } from "react";
-import { CustomerBreakpoint, Laptop, lmobile, ltablet, mobile, tablet } from "../responsive";
+import { useRef, useState } from "react";
+import { Laptop, lmobile, ltablet, mobile, tablet } from "../responsive";
 import MobileHeader from "../Components/Home/MobileHeader";
-
+import MobileBottom from "../Components/Home/MobileBottom";
+import { useEffect } from "react";
 
 const Container = styled.div`
   background: url(${(props) => props.bg});
@@ -21,22 +22,23 @@ const Container = styled.div`
   position: relative;
 `;
 const HeaderCon = styled.div`
-position: sticky;
-top: 0;
-z-index: 200;
-width: 100%;
-// background:black;
-padding: 0 14vh;
-${tablet({ padding: "0 4vh" })}
-${Laptop({ padding: "0 4vh" })}
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  width: 100%;
+  // background:black;
+  padding: 0 14vh;
+  transition:1s linear;
+  ${tablet({ padding: "0 4vh" })}
+  ${Laptop({ padding: "0 4vh" })}
   ${mobile({ padding: "0 4vh" })}
   box-sizing:border-box;
 `;
 const MobileHeaderCon = styled.div`
-  position:sticky;
-  top:0;
-  z-index:200;
-`
+  position: sticky;
+  top: 0;
+  z-index: 200;
+`;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -47,13 +49,13 @@ const MainTextCon = styled.div`
   height: 100%;
   width: 100%;
   ${tablet({ padding: "0 4vh" })}
-${Laptop({ padding: "0 4vh" })}
+  ${Laptop({ padding: "0 4vh" })}
   ${mobile({ padding: "0 4vh" })}
 `;
 const MainCon = styled.div``;
 const MainConLeft = styled.div`
   color: white;
-  flex:3;
+  flex: 3;
 `;
 const MainConLeftHr = styled.hr`
   border: none;
@@ -66,14 +68,14 @@ const MainConLeftHr = styled.hr`
 const MainConLeftSmallText = styled.span`
   margin-top: 30px;
   width: ${(props) => props.wd};
-  max-width:300px;
+  max-width: 300px;
 `;
 const MainConLeftBigText = styled.span`
   margin-top: 30px;
   font-size: 33px;
   font-weight: 500;
-  max-width:300px;
-  ${tablet({fontSize:'28px'})}
+  max-width: 300px;
+  ${tablet({ fontSize: "28px" })}
 `;
 const MainConLeftButton = styled.div`
   width: 100%;
@@ -81,31 +83,43 @@ const MainConLeftButton = styled.div`
 `;
 const MainConRight = styled.div`
   margin-top: 40px;
-  flex:1;
-  ${lmobile({display:'none'})};
+  flex: 1;
+  ${lmobile({ display: "none" })};
 `;
 const MainConRightImgCon = styled.div`
-max-width:400px;
-${ltablet({width:'230px'})}
-${tablet({width:'150px'})}
-
+  max-width: 400px;
+  ${ltablet({ width: "230px" })}
+  ${tablet({ width: "150px" })}
 `;
-const MainConRightImg = styled.img`
-`;
+const MainConRightImg = styled.img``;
 
 function ContactUs({ route }) {
   const [Form, setForm] = useState(false);
-  const [height,setheight]=useState()
+  const [height, setheight] = useState();
   const handleClick = () => {
     setForm(true);
   };
 
+  const MGRef = useRef(null);
+  const [scrollPosition,setScrollPosition]=useState()
+
+
+
+window.addEventListener("scroll",()=>{
+      const x = window.scrollY;
+      if(x>580){
+       setScrollPosition(true)
+      }else{
+               setScrollPosition(false);
+
+      }
+})
+
   // useEffect(() => {
-  
-    
+
   //   window.addEventListener('scroll',()=>{
   //     // if(document.getElementById('ManagementTeam').scrollTop){
-        
+
   //     //   const test = document.getElementById('ManagementTeam').scrollTop;
   //     // }
   //     setheight(document.getElementById('ManagementTeam').scrollTop)
@@ -113,18 +127,16 @@ function ContactUs({ route }) {
   //   })
   // }, [])
   return (
- 
-
     <Container id="contact-us" bg={bg} className="PP">
       <Wrapper>
-      <MobileHeaderCon>
-            <MobileHeader bgt='scrollTrasparent' 
-            onscroll='blue' />
-      </MobileHeaderCon>
+        <MobileHeaderCon>
+          <MobileHeader bgt="scrollTrasparent" onscroll="blue" />
+          <MobileBottom />
+        </MobileHeaderCon>
 
-          <HeaderCon >
-            <Header route={route} header={false} />
-          </HeaderCon>
+        <HeaderCon style={{ background: scrollPosition && 'blue'}}>
+          <Header bg={scrollPosition && "blue"} route={route} header={true} />
+        </HeaderCon>
         <MainTextCon className="flex aic jcc">
           <MainCon className="flex aic jcc">
             <MainConRight>
@@ -165,7 +177,9 @@ function ContactUs({ route }) {
             </MainConLeft>
           </MainCon>
         </MainTextCon>
-        <ManagementTeam id='ManagementTeam' />
+        <div ref={MGRef}>
+          <ManagementTeam id="ManagementTeam" />
+        </div>
         <Footer />
       </Wrapper>
     </Container>

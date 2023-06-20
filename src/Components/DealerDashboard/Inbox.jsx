@@ -3,9 +3,14 @@ import {
   Check,
   DeleteOutline,
   EditOutlined,
+  Favorite,
+  InboxSharp,
   InfoOutlined,
+  LabelImportant,
   MailOutline,
+  Send,
   StarBorderOutlined,
+  WatchLater,
 } from "@mui/icons-material";
 import styled from "styled-components";
 import Header from "./Header";
@@ -19,7 +24,10 @@ const HeaderCon = styled.div`
   background: #fff7f3;
 `;
 
-const SortWrapper = styled.div``;
+const SortWrapper = styled.div`
+  box-sizing: border-box;
+  padding:0 2vh;
+`;
 const SortCon = styled.div`
   background: white;
   padding: 10px;
@@ -42,37 +50,35 @@ const SortButton = styled.div`
   cursor: pointer;
 `;
 const MailCon = styled.div`
-  flex: 5;
-  margin-right: 30px;
+  flex: 4;
+  margin-left: 15px;
 `;
 
-const SelectMailCon = styled.div`
+const SideMenu = styled.div`
+flex:2;
+`
+const SideMenuTextCon = styled.div`
+  color: gray;
+  width: 100%;
+  padding: 10px 0;
+  margin: 2px 0;
   background: white;
-  flex: 2;
-  padding: 20px 15px;
+  // color: orangered;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 `;
-const SelectMail = styled.div`
-  padding: 10px;
-  background: #ffe8e4;
-  box-sizing: border-box;
-  border-radius: 5px;
-  margin-bottom: 7px;
-  cursor: pointer;
-`;
-const SelectMailTextCon = styled.div``;
-const SelectMailIcon = styled.div``;
-const SelectMailText = styled.span`
-  color: #ff9584;
-`;
-const SelectMailNumCon = styled.span`
-  background: #ff9584;
-  border-radius: 16px;
-  padding: 0 9px;
-`;
-const SelectMailNum = styled.span`
-  color: #ffe8e4;
-`;
+const SideMenuTextIcon = styled.div`
+margin:0 6px;
+
+`
+const SideMenuText = styled.span`
+font-size:1rem;
+`
+
 function Inbox({ route }) {
+
+  
+
   const inboxMsg = [
     { id: 0 },
     { id: 0 },
@@ -122,81 +128,70 @@ function Inbox({ route }) {
         </SortButtonCon>
       </SortWrapper>
       <Wrapper className="flex aifs jcfs">
+        <SideMenu>
+          <SideMenuTextCon
+            className="flex aic jcfs"
+            style={{ background: "#ffe8e4" ,color:'orangered'}}
+          >
+            <SideMenuTextIcon className="flex aifs jcc">
+              <InboxSharp sx={{ fontSize: "21px" }} />
+            </SideMenuTextIcon>
+            <SideMenuText>Inbox</SideMenuText>
+          </SideMenuTextCon>
+          <SideMenuTextCon className="flex aic jcfs">
+            <SideMenuTextIcon className="flex aifs jcc">
+              <Favorite sx={{ fontSize: "21px" }} />
+            </SideMenuTextIcon>
+            <SideMenuText>Starred</SideMenuText>
+          </SideMenuTextCon>
+          <SideMenuTextCon className="flex aic jcfs">
+            <SideMenuTextIcon className="flex aifs jcc">
+              <WatchLater sx={{ fontSize: "21px" }} />
+            </SideMenuTextIcon>
+            <SideMenuText>Snoozed</SideMenuText>
+          </SideMenuTextCon>
+          <SideMenuTextCon className="flex aic jcfs">
+            <SideMenuTextIcon className="flex aifs jcc">
+              <LabelImportant sx={{ fontSize: "21px" }} />
+            </SideMenuTextIcon>
+            <SideMenuText>Important</SideMenuText>
+          </SideMenuTextCon>
+          <SideMenuTextCon className="flex aic jcfs">
+            <SideMenuTextIcon className="flex aifs jcc">
+              <Send sx={{ fontSize: "21px" }} />
+            </SideMenuTextIcon>
+            <SideMenuText>Sent</SideMenuText>
+          </SideMenuTextCon>
+          <SideMenuTextCon className="flex aic jcfs">
+            <SideMenuTextIcon className="flex aifs jcc">
+              <LabelImportant sx={{ fontSize: "21px",color:'green' }} />
+            </SideMenuTextIcon>
+            <SideMenuText>Team</SideMenuText>
+          </SideMenuTextCon>{" "}
+          <SideMenuTextCon className="flex aic jcfs">
+            <SideMenuTextIcon className="flex aifs jcc">
+              <LabelImportant sx={{ fontSize: "21px",color:'yellow' }} />
+            </SideMenuTextIcon>
+            <SideMenuText>New Rep`s</SideMenuText>
+          </SideMenuTextCon>{" "}
+          <SideMenuTextCon className="flex aic jcfs">
+            <SideMenuTextIcon className="flex aifs jcc">
+              <LabelImportant sx={{ fontSize: "21px",color:'blue' }} />
+            </SideMenuTextIcon>
+            <SideMenuText>Projects</SideMenuText>
+          </SideMenuTextCon>{" "}
+          <SideMenuTextCon className="flex aic jcfs">
+            <SideMenuTextIcon className="flex aifs jcc">
+              <LabelImportant sx={{ fontSize: "21px",color:'orangered' }} />
+            </SideMenuTextIcon>
+            <SideMenuText>Personal</SideMenuText>
+          </SideMenuTextCon>
+        </SideMenu>
         <MailCon>
           {inboxMsg.map((item, i) => (
             <Mail key={i} />
           ))}
         </MailCon>
-        <SelectMailCon>
-          <SelectMail className="flex aic jcsb">
-            <SelectMailTextCon className="flex aic jcc">
-              <SelectMailIcon className="flex aic jcc">
-                <MailOutline sx={{ color: "#ff9584", marginRight: "7px" }} />
-              </SelectMailIcon>
-              <SelectMailText>Inbox</SelectMailText>
-            </SelectMailTextCon>
-            <SelectMailNumCon className="flex aic jcc">
-              <SelectMailNum>68</SelectMailNum>
-            </SelectMailNumCon>
-          </SelectMail>
-          <SelectMail className="flex aic jcsb">
-            <SelectMailTextCon className="flex aic jcc">
-              <SelectMailIcon className="flex aic jcc">
-                <Check sx={{ color: "#ff9584", marginRight: "7px" }} />
-              </SelectMailIcon>
-              <SelectMailText>Send</SelectMailText>
-            </SelectMailTextCon>
-            <SelectMailNumCon className="flex aic jcc">
-              <SelectMailNum>68</SelectMailNum>
-            </SelectMailNumCon>
-          </SelectMail>
-          <SelectMail className="flex aic jcsb">
-            <SelectMailTextCon className="flex aic jcc">
-              <SelectMailIcon className="flex aic jcc">
-                <EditOutlined sx={{ color: "#ff9584", marginRight: "7px" }} />
-              </SelectMailIcon>
-              <SelectMailText>Draft</SelectMailText>
-            </SelectMailTextCon>
-            <SelectMailNumCon className="flex aic jcc">
-              <SelectMailNum>68</SelectMailNum>
-            </SelectMailNumCon>
-          </SelectMail>
-          <SelectMail className="flex aic jcsb">
-            <SelectMailTextCon className="flex aic jcc">
-              <SelectMailIcon className="flex aic jcc">
-                <StarBorderOutlined
-                  sx={{ color: "#ff9584", marginRight: "7px" }}
-                />
-              </SelectMailIcon>
-              <SelectMailText>Starred</SelectMailText>
-            </SelectMailTextCon>
-            <SelectMailNumCon className="flex aic jcc">
-              <SelectMailNum>68</SelectMailNum>
-            </SelectMailNumCon>
-          </SelectMail>
-          <SelectMail className="flex aic jcsb">
-            <SelectMailTextCon className="flex aic jcc">
-              <SelectMailIcon className="flex aic jcc">
-                <InfoOutlined sx={{ color: "#ff9584", marginRight: "7px" }} />
-              </SelectMailIcon>
-              <SelectMailText>Spam</SelectMailText>
-            </SelectMailTextCon>
-            <SelectMailNumCon className="flex aic jcc">
-              <SelectMailNum>68</SelectMailNum>
-            </SelectMailNumCon>
-          </SelectMail>
-          <SelectMail className="flex aic jcsb">
-            <SelectMailTextCon className="flex aic jcc">
-              <SelectMailIcon className="flex aic jcc">
-                <DeleteOutline sx={{ color: "#ff9584", marginRight: "7px" }} />
-              </SelectMailIcon>
-              <SelectMailText>Trash</SelectMailText>
-            </SelectMailTextCon>
-            <SelectMailNumCon className="flex aic jcc">
-              <SelectMailNum>68</SelectMailNum>
-            </SelectMailNumCon>
-          </SelectMail>
-        </SelectMailCon>
       </Wrapper>
     </Container>
   );

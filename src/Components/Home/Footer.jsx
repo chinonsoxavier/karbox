@@ -11,7 +11,7 @@ import { Laptop, lmobile, ltablet ,mobile, tablet} from '../../responsive';
 
 
 const FooterCon = styled.div`
-   background:url(${props=>props.bg});
+  background: url(${(props) => props.bg});
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -20,12 +20,13 @@ const FooterCon = styled.div`
   display: flex;
   align-items: center;
   // background-color: green;
-  margin-top:90px;
-  // padding: 50px 14vh;
-  ${tablet({ padding: "0 4vh" })}
-  ${Laptop({ padding: "0 4vh" })}
-    ${mobile({ padding: "0 4vh" })}
-    box-sizing:border-box;
+  margin-top: 90px;
+  padding: 5px 14vh;
+  ${tablet({ padding: "0 4vh" })};
+  ${Laptop({ padding: "0 4vh" })};
+  ${mobile({ padding: "0 1vh" })};
+  ${lmobile({ padding: "0" })};
+  box-sizing:border-box;
 `;
 const Container = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const Container = styled.div`
   justify-content: space-between;
   flex-direction: column;
   box-sizing:border-box;
-  padding:0 20px;
+  padding:8px 20px;
   width:100%;
 `;
 const Wrapper = styled.div`
@@ -90,9 +91,9 @@ const FooterDivisions=styled.div`
      align-items:flex-start;
      justify-content:space-between;
      flex-direction:column; 
-     margin:0 10px;
+     margin:8px 10px;
 `
-const FooterLinksTxtHeader = styled.h3`
+const FooterLinksTxtHeader = styled.span`
     font-size:21px;
     cursor:pointer;
     white-space:nowrap;
@@ -104,16 +105,17 @@ const FooterLinksTxtHeader = styled.h3`
     }   
 `
 
-const FooterLinksTxt = styled.p`
+const FooterLinksTxt = styled.span`
   margin-top: 15px;
   color: whitesmoke;
-  font-size: 18px;
+  font-size: 19px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   ${ltablet({ fontSize: "13px",marginTop:'10px' })};
   ${mobile({ fontSize: "8px",marginTop:'0' })};
+  ${lmobile({ marginTop:'5px' })};
 
   &:hover {
     color: orange;
@@ -140,6 +142,7 @@ const SocialIcon = styled.div`
     ${ltablet({width:'37px',height:'37px',padding:'3px',marginRight:'3px'})}
     ${mobile({width:'30px',height:'30px',padding:'1px',marginRight:'1px'})}
     color:gray;
+    ${lmobile({height:'30px',width:'30px'})}
     &:hover{
       background-color:#EE4730;
       color:white;
@@ -151,7 +154,7 @@ const HR = styled.hr`
     height:1px;
     width:80%;
     margin-bottom:50px;
-    ${lmobile({marginTop:'20px'})}
+    ${lmobile({marginBottom:'0px'})}
     ${mobile({marginBottom:'10px'})};
 `
 const BottomFooter=styled.div`
@@ -217,7 +220,7 @@ const FooterCopyrightTxt = styled.p`
 
 function Footer() {
   return (
-    <FooterCon className="w100 " bg={bg} >
+    <FooterCon className="w100 " bg={bg}>
       <Container className="w100">
         <TFooter>
           <TopFooter1>
@@ -230,7 +233,7 @@ function Footer() {
               <FooterLinksTxt>Luxurios</FooterLinksTxt>
             </FooterDivisions>
 
-            <FooterDivisions>
+            <FooterDivisions className="FooterMobile">
               <FooterLinksTxtHeader>About Us</FooterLinksTxtHeader>
               <FooterLinksTxt>About Company</FooterLinksTxt>
               <FooterLinksTxt>Help</FooterLinksTxt>
@@ -243,7 +246,7 @@ function Footer() {
             </FooterDivisions>
           </TopFooter1>
           <TopFooter2>
-            <FooterDivisions>
+            <FooterDivisions id="FooterMobile">
               <FooterLinksTxtHeader>We`re Here to Help</FooterLinksTxtHeader>
               <FooterLinksTxt>Your Account</FooterLinksTxt>
               <FooterLinksTxt>Safe and Secure</FooterLinksTxt>
@@ -252,42 +255,42 @@ function Footer() {
               <FooterLinksTxt>Help & FAQ</FooterLinksTxt>
             </FooterDivisions>
 
-            <FooterDivisions id='FooterDivision_FollowUs' ht="">
+            <FooterDivisions id="FooterDivision_FollowUs" ht="">
               <FooterLinksTxtHeader>Follow Us</FooterLinksTxtHeader>
               <FooterLinksTxt>
-                <LocalPhone id="FooterLinksTxt_Icon" />
+                <LocalPhone id="FooterLinksTxt_Icon FooterIcons" />
                 (646) 663-4574
               </FooterLinksTxt>
               <FooterLinksTxt>
                 {" "}
-                <Fax id=" FT_Icon" /> 
+                <Fax id=" FT_Icon FooterIcons" />
                 (646) 968-0608{" "}
               </FooterLinksTxt>
               <FooterLinksTxt>
                 {" "}
-                <AllInbox id=" FT_Icon" />
-                 help@engotheme.com{" "}
+                <AllInbox id=" FT_Icon FooterIcons" />
+                help@engotheme.com{" "}
               </FooterLinksTxt>
               <FooterLinksTxt>
                 {" "}
-                <Send id=" FT_Icon" />
-                 1201 BroadWay Suite{" "}
+                <Send id=" FT_Icon FooterIcons" />
+                1201 BroadWay Suite{" "}
               </FooterLinksTxt>
               <FooterSocial>
                 <SocialIcon bgc="#EE4730">
-                  <FacebookRounded />
+                  <FacebookRounded id="FooterIcons" />
                 </SocialIcon>
 
                 <SocialIcon bgc="white">
-                  <Twitter />
+                  <Twitter id="FooterIcons" />
                 </SocialIcon>
 
                 <SocialIcon bgc="white">
-                  <Instagram />
+                  <Instagram id="FooterIcons" />
                 </SocialIcon>
 
                 <SocialIcon bgc="white">
-                  <LinkedIn />
+                  <LinkedIn id="FooterIcons" />
                 </SocialIcon>
               </FooterSocial>
             </FooterDivisions>

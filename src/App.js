@@ -17,6 +17,8 @@ import DealerProfile from "./Pages/DealerProfile";
 import Inventory2 from "./Pages/Inventory2";
 import DealerDashboard from "./Pages/DealerDashboard";
 import SearchPage from './Pages/SearchPage'
+import Register from './Pages/Register'
+import Login from './Pages/Login'
 import { UserContext } from "./Components/UseContext/Context";
 const Container = styled.div``;
 const Wrapper = styled.div``;
@@ -71,6 +73,14 @@ useEffect(() => {
               <Route
                 path={`/welcome-back`}
                 element={<MyAccount />}
+              />
+              <Route
+                path={`/log-in`}
+                element={<Login />}
+              />
+              <Route
+                path={`/sign-up`}
+                element={<Register />}
               />
               <Route
                 path={`/inventory`}
@@ -131,7 +141,7 @@ useEffect(() => {
                 element={<DealerDashboard route={"customers"} />}
               />
               <Route
-                path="/seller-profile/reviews/:id"
+                path="/seller-profiledd/reviews/:id"
                 element={<DealerDashboard route={"reviews"} />}
               />
               <Route
@@ -153,8 +163,20 @@ useEffect(() => {
               <Route path="/vehicle/:id" element={<VehicleDetails />} />
               <Route path="/dealer-profile/:id" element={<Vendor />} />
               <Route
-                path="/customer/account"
-                element={<Customer user={user} route="account" />}
+                path="/my-account/general"
+                element={<Customer user={user} route="general" />}
+              />
+              <Route
+                path="/my-account/inbox"
+                element={<Customer user={user} route="inbox" />}
+              />
+              <Route
+                path="/my-account/chats"
+                element={<Customer user={user} route="chats" />}
+              />
+              <Route
+                path="/my-account/close-account"
+                element={<Customer user={user} route="close-account" />}
               />
               <Route
                 path="/customer/:id"

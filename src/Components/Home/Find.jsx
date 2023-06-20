@@ -14,6 +14,7 @@ import {
 } from "@mui/icons-material";
 import { useState } from "react";
 import { Rating } from "@mui/material";
+import { lmobile } from "../../responsive";
 const Container = styled.div`
   width: 100%;
 `;
@@ -54,6 +55,7 @@ const ProductsName = styled.p`
 `;
 const ProductsImg = styled.img`
   width: 100%;
+  ${lmobile({width:'50px'})}
 `;
 
 const ProductInfo = styled.div``;
@@ -161,16 +163,20 @@ const Find = () => {
         </Header>
         <ProductsCon>
           <Swiper
-            slidesPerView={4}
+            // slidesPerView={4}
             spaceBetween={15}
             navigation={true}
             modules={[Navigation]}
             className="FindProducts"
+            slidesPerView='auto'
           >
             {slides.map((item, i) => (
               <SwiperSlide
                 key={i}
-                style={{ border: i === hovered && "1px solid orangered" }}
+                style={{maxWidth:'100%',width:'100%',minWidth:'250px',
+                  border: i === hovered && "1px solid orangered",
+                  maxWidth: "25%",
+                }}
                 id="FindProducts"
                 onMouseOver={() => setHovered(i)}
                 onMouseLeave={() => setHovered("")}

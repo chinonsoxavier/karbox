@@ -3,7 +3,7 @@ import Header from "../Components/Home/Header";
 import MobileBottom from "../Components/Home/MobileBottom";
 import MobileHeader from "../Components/Home/MobileHeader";
 import Products from "../Components/Inventory/Products";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowDropDown,
   ChevronLeft,
@@ -17,7 +17,11 @@ import {
 } from "@mui/icons-material";
 import Footer from "../Components/Home/Footer";
 import {
-  Laptop,
+  CustomerBreakpoint,
+  lmobile,
+  ltablet,
+  metablet,
+  mmobile,
   mobile,
   tablet,
 } from "../responsive";
@@ -27,7 +31,9 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   background-color: black;
   padding: 0 14vh;
+  position:relative;
   ${mobile({ padding: "0 4vh" })};
+  ${ltablet({ padding: "0 3vh" })};
 `;
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -41,9 +47,6 @@ const HeaderCon = styled.div`
   width: 100%;
   // background:black;
   // padding: 0 14vh;
-  ${tablet({ padding: "0 4vh" })}
-  ${Laptop({ padding: "0 4vh" })}
-  ${mobile({ padding: "0 4vh" })}
   box-sizing:border-box;
 `;
 const MobileHeaderCon = styled.div`
@@ -57,11 +60,16 @@ const SortsCon = styled.div`
   box-sizing: border-box;
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
-  position: sticky;x
+  position: sticky;
   top: 0;
+  width:100%;
+  ${metablet({flexDirection:'column'})}
+  ${mmobile({paddind:'11px 3px'})}
 `;
 const SortsLeft = styled.div`
   flex: 3;
+  // min-width:200px;
+  width:100%;
 `;
 const SortsLeftIcon = styled.div`
   flex: 1;
@@ -81,10 +89,12 @@ const SortsInput = styled.input`
   padding: 11px 0;
   flex: 1;
   background: transparent;
+  ${mmobile({ padding: "5px 0" })};
 
   &::placeholder {
     font-weight: 600;
     font-size: 18px;
+    ${mmobile({ fontSize:'10px' })}
   }
 `;
 const SortsLeftButton = styled.button`
@@ -95,30 +105,47 @@ const SortsLeftButton = styled.button`
   padding: 11px;
   height: 100%;
   margin:0 15px;
+  ${mmobile({fontSize:'11px'})}
+
+  ${mmobile({padding:'5px'})}
 `;
 const SortsRight = styled.div`
   flex: 2;
+  width: 100%;
+  justify-content:space-evenly;
+  margin-top:10px ;
+  ${CustomerBreakpoint({justifyContent:'center',margin:'10px 0'})}
 `;
 const SortsRightSelect = styled.div`
   padding: 11px 10px;
   border-radius: 7px;
   border: 1px solid rgb(233, 231, 231);
+  margin: 0 5px;
+  ${CustomerBreakpoint({ padding: "6px 4px", fontSize: "12px" })};
+  ${mmobile({padding:'2px 1px',margin:'0 2px'})}
 `;
 const SortsRightSelectText = styled.div``;
 const SortsRightSelectIcon = styled.div`
   margin-left: 5px;
 `;
 
+
 const Filter = styled.div`
   padding: 11px 10px;
   border-radius: 7px;
   border: 1px solid rgb(233, 231, 231);
+  ${CustomerBreakpoint({
+    padding: "9px 7px",
+    fontSize: "12px",
+    margin: "0 2px",
+  })};
+  ${mmobile({ padding: "4px 1px", margin: "0 2px" })}
 `;
 const FilterText = styled.span``;
 
 const FiltersWrapper = styled.div`
-  position: sticky;
-  top:190px;
+  position: relative;
+  top:100px;
   z-index:100;
 `;
 const FiltersCon = styled.div`
@@ -127,14 +154,17 @@ const FiltersCon = styled.div`
   box-sizing: border-box;
   padding: 15px;
   z-index: 2;
-  top: -20px;
+  top: 0;
 `;
 const SortCon = styled.div`
   height: 100%;
+   position:relative;
+  bottom:100px;
+  width:100%;
 `;
 const SortWrapper = styled.div`
   background: white;
-  width: 450px;
+ width:100%;
   box-sizing: border-box;
 `;
 const SortsTextCon = styled.div`
@@ -144,9 +174,15 @@ const SortsTextCon = styled.div`
     background:whitesmoke;
   }
 `;
-const SortsText = styled.span``;
+const SortsText = styled.span`
+  ${CustomerBreakpoint({
+    fontSize: "14px",
+  })};
+`;
 const BrandsWrapper = styled.div`
-  position: relative;
+  // position: relative;
+   position:relative;
+  bottom:100px;
 `;
 const BrandsCon = styled.div`
   width: 350px;
@@ -177,6 +213,9 @@ const BrandsHeader = styled.div``;
 const BrandsHeaderTextCon = styled.div``;
 const BrandsHeaderText = styled.span`
   font-weight: 500;
+  ${CustomerBreakpoint({
+    fontSize: "14px",
+  })};
 `;
 const BrandsHeaderIcon = styled.div``;
 const BrandsTrendCon = styled.div`
@@ -187,7 +226,11 @@ const BrandsTrendConsHeader = styled.div`
   color: grey;
   font-weight: 600;
 `;
-const BrandsTrendConHeaderTextCon = styled.span``;
+const BrandsTrendConHeaderTextCon = styled.span`
+  ${CustomerBreakpoint({
+    fontSize: "17px",
+  })};
+`;
 const BrandsTrend = styled.div`
   min-width: 80px;
   margin: 5px 0;
@@ -197,6 +240,9 @@ const BrandsTrendImg = styled.img`
 `;
 const BrandsTrendText = styled.span`
   font-size: 13px;
+  ${CustomerBreakpoint({
+    fontSize: "11px",
+  })};
 `;
 const BrandsNameCon = styled.div``;
 const BrandsName = styled.div`
@@ -206,14 +252,22 @@ const BrandsNameHeading = styled.span`
   color: gray;
   font-size: 14px;
   margin: 6px 0;
+  ${CustomerBreakpoint({
+    fontSize: "10px",
+  })};
 `;
 const BrandsNameText = styled.span`
   font-size: 14px;
   color: ${(props) => props.all && "orangered"};
+  ${CustomerBreakpoint({
+    fontSize: "10px",
+  })};
 `;
 
 const PriceCon = styled.div`
   width: 100%;
+   position:relative;
+  bottom:100px;
 `;
 const PriceWrapper = styled.div`
   width: 100%;
@@ -221,7 +275,9 @@ const PriceWrapper = styled.div`
   max-width: 430px;
   padding-bottom: 20px;
 `;
-const PricesWrapper = styled.div``;
+const PricesWrapper = styled.div`
+ ${lmobile({display:'none'})}
+`;
 const Prices = styled.div`
   display: flex;
   align-items: center;
@@ -234,16 +290,23 @@ const Prices = styled.div`
 `;
 const PricesText = styled.span`
   font-size: 12px;
+  ${CustomerBreakpoint({
+    fontSize: "14px",
+  })};
 `;
 const PriceCustom = styled.div`
   padding: 20px;
   box-sizing: border-box;
+  ${lmobile({padding:'0'})}
 `;
 const PriceCustomHeader = styled.div`
   margin: 7px 0;
+  ${lmobile({margin:'0'})}
 `;
 const PriceCustomHeaderText = styled.span``;
-const PriceCustomInputWrapper = styled.div``;
+const PriceCustomInputWrapper = styled.div`
+${lmobile({flexDirection:'column',alignItems:'flex-start'})}
+`;
 const PriceCustomInputCon = styled.div``;
 const PriceCustomInput = styled.input`
   border: none;
@@ -272,9 +335,14 @@ const PriceCustomButton = styled.button`
   border-radius: 4px;
 `;
 
-const FilterCon = styled.div``;
+const FilterCon = styled.div`
+  // position:relative;
+`;
 const FilterWrapper = styled.div`
   width: 380px;
+  position:relative;
+  bottom:100px;
+
   background: white;
   box-sizing: border-box;
   padding: 0 10px;
@@ -340,6 +408,7 @@ const FilterOptionsTextSwitch = styled.div``;
 
 const ProductsCon = styled.div``;
 function Inventory({ route }) {
+ 
   const [filter, setFilter] = useState({ show: false, filter: "" });
   const [transmission, setTransmission] = useState("any");
   const [features, setFeatures] = useState("any");
@@ -351,7 +420,7 @@ function Inventory({ route }) {
     }
   }, [filter]);
 
-  const handleClick = (sort) => {
+  const ShowFilter = (sort) => {
     setSort(sort);
     setTimeout(() => {
       setFilter({ show: false });
@@ -556,6 +625,7 @@ function Inventory({ route }) {
   ];
 
   const [sort, setSort] = useState("Sort");
+  const [showFilterSelect, setShowFilterSelect] = useState('');
   const [show, setShow] = useState("Transmision");
   const [brand, setBrand] = useState("Brand");
   const [price, setPrice] = useState("Price");
@@ -564,20 +634,28 @@ function Inventory({ route }) {
     const [searchQuery, setSearchQuery] = useState("");
     console.log(searchQuery)
 
+
   return (
     <Container className="PP">
       <MobileHeaderCon>
         <MobileHeader bgt="scrollTrasparent" onscroll="blue" />
       </MobileHeaderCon>
       <HeaderCon className="flex aic jcc fdc w100">
-        <Header route={route} header={true} />
-        <SortsCon className="flex aic jcsb w100 bgw">
-          <SortsLeft className="flex aic jcc ">
+        <Header route={route} bg="black" header={true} />
+        <SortsCon className="flex aic wrap jcsb w100 bgw">
+          <SortsLeft id="SortsLeft" className="flex aic jcc ">
             <SortsLeftIcon className="flex aic jcc cp">
-              <KeyboardArrowLeft sx={{ fontSize: "35px", fontWeight: 600 }} />
+              <KeyboardArrowLeft
+                id="InventoryIconCaret"
+                sx={{ fontSize: "35px", fontWeight: 600 }}
+              />
             </SortsLeftIcon>
             <SortsInputCon className="flex aic jcfe">
-              <Search sx={{ fontSize: "29px", margin: "0 6px" }} />
+              <Search
+                id="InventoryIcon"
+                className="flex aic jcc"
+                sx={{ fontSize: "29px", margin: "0 6px" }}
+              />
               <SortsInput
                 className="flex aic jcc s"
                 placeholder="Search For Cars You Like...."
@@ -595,7 +673,7 @@ function Inventory({ route }) {
               {/* <Search/> */}
             </SortsLeftButton>
           </SortsLeft>
-          <SortsRight className="flex aic jcsa">
+          <SortsRight id="SortsRight" className="flex aic ">
             <SortsRightSelect
               onClick={() => setFilter({ show: true, filter: "Sort" })}
               className="flex aic jcsb"
@@ -639,46 +717,12 @@ function Inventory({ route }) {
                 <SortCon className="flex aife jcfe fdc">
                   <SortWrapper>
                     {data[0].map((item) => (
-                      <SortsTextCon
-                        onClick={
-                          // (() => setSort(item.text)
-                          // () => setFilter({ show: false })
-                          // )
-                          () => handleClick(item.text)
-                        }
-                      >
+                      <SortsTextCon onClick={() => ShowFilter(item.text)}>
                         <SortsText>{item.text}</SortsText>
                       </SortsTextCon>
                     ))}
                   </SortWrapper>
                 </SortCon>
-                // <div className="addProductItem">
-                //   <FormControl>
-                //     <InputLabel>Negotiable</InputLabel>
-                //     <Select
-                //       placeholder="Sort"
-                //       label="Sort"
-                //       value={sort}
-                //       onChange={(e) => () => setSort(e.target.value)}
-                //     >
-                //       <MenuItem value="Yes">Yes</MenuItem>
-                //       <MenuItem value="No">No</MenuItem>
-                //       <MenuItem value="No">No</MenuItem>
-                //       <MenuItem value="No">No</MenuItem>
-                //     </Select>
-                //   </FormControl>
-                // </div>
-                // <SortCon className="flex aifs jcsb fdc">
-                //   <SortWrapper>
-                //     <select>
-                //       <option value="New Listings">New Listings</option>
-                //       <option value="Lowest Price">Lowest Price</option>
-                //       <option value="Highest Price">Highest Price</option>
-                //       <option value="Lowest mileage">Lowest mileage</option>
-                //       <option value="Newest year">Newest year</option>
-                //     </select>
-                //   </SortWrapper>
-                // </SortCon>
               )}
               {filter.filter === "Brands" && (
                 <BrandsWrapper className="flex aife w100 jcfe">
@@ -761,7 +805,7 @@ function Inventory({ route }) {
                           Custom Price($)
                         </PriceCustomHeaderText>
                       </PriceCustomHeader>
-                      <PriceCustomInputWrapper className="flex aic jcsb">
+                      <PriceCustomInputWrapper className="flex aic jcsb wrap">
                         <PriceCustomInputCon>
                           <PriceCustomInput placeholder="Min" />
                         </PriceCustomInputCon>
@@ -874,18 +918,7 @@ function Inventory({ route }) {
             </FiltersCon>
           )}
         </FiltersWrapper>
-        {/* <SortCategories/> */}
-        {/* <SortCon>
-        <FilterProducts/>
-          </SortCon> */}
 
-        {/* {filter.show && (
-          <FiltersCon>
-            {filter.filter === "Sort" && <SortCon>Sort</SortCon>}
-            {filter.filter === "Brands" && <BrandsCon>Brands</BrandsCon>}
-            {filter.filter === "Price" && <PriceCon>Price</PriceCon>}
-          </FiltersCon>
-        )} */}
         <ProductsCon>
           <Products />
         </ProductsCon>

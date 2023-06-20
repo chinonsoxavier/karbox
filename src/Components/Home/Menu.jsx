@@ -3,12 +3,12 @@ import styled from "styled-components";
 import {Link} from 'react-router-dom'
 const MenuContainer = styled.div`
   background-color: white;
-  position: absolute;
+  position: fixed;
   overflow-y:scroll;
   overflow-x:hidden;
-  width: 50vw;
+  width: 70vw;
   right:0;
-  z-index:200;
+  z-index:300;
   height: 100vh;
   top: 0;
   color: #42597a;
@@ -21,7 +21,6 @@ const MenuWrapper = styled.div`
 `;
 
 const MenuHeader = styled.div`
-    background-color: red;
     padding:0 10px;
 `;
 const GreetingsTextHeader = styled.span`
@@ -33,7 +32,7 @@ const GreetingsTextHeader = styled.span`
 `;
 
 const Components = styled.div`
-  padding: 5px 0;
+  padding: 2px 0;
   width: 100%;
 `;
 const Child = styled.div`
@@ -46,7 +45,7 @@ const ComponentsText = styled.span`
   margin:2px 0;
   cursor:pointer;
   width:100%;
-  padding:10px 10px;
+  padding:5px 10px;
   box-sizing:border-box;
   white-space:nowrap;
 
@@ -66,6 +65,8 @@ const MenuButton = styled.button`
   color: white;
   cursor: pointer;
   font-weight: 700;
+  margin:6px 0;
+  border-radius:7px;
 `;
 
 const HrCon = styled.div``
@@ -77,6 +78,46 @@ const Hr = styled.hr`
 `
 
 function Menu({ setMenu }) {
+
+  const links = [
+    [
+      {
+        link: "Mercedes Benz",
+      },
+      {
+        link: "Porsche",
+      },
+      {
+        link: "Lamborghini",
+      },
+      {
+        link: "Range Rover",
+      },
+      {
+        link: "Lexus",
+      },
+      {
+        link: "Tesla",
+      },
+      {
+        link: "Bugatti",
+      },
+    ],
+    [
+      {
+        link: "Electric",
+      },
+      {
+        link: "Hybrid Electric",
+      },
+      {
+        link: "Range",
+      },
+      {
+        link: "Performance",
+      },
+    ],
+  ];
 
   return (
     <MenuContainer className=" bsbb">
@@ -105,8 +146,8 @@ function Menu({ setMenu }) {
               <Edit
                 sx={{ marginRight: "8px", fontWeight: 300, fontSize: "15px" }}
               />
-              <Link to='/customer/address-book' className='link'>
-              Edit Profile
+              <Link to="/customer/address-book" className="link">
+                Edit Profile
               </Link>
             </ComponentsText>
             <ComponentsText className="flex bsbb aic jcsb w100">
@@ -124,23 +165,28 @@ function Menu({ setMenu }) {
           </HrCon>
           <Child className="flex bsbb aifs jcc fdc">
             <GreetingsTextHeader>BRANDS</GreetingsTextHeader>
-            <ComponentsText>Mercedes Benz</ComponentsText>
-            <ComponentsText>Porsche</ComponentsText>
-            <ComponentsText>Lamborghini</ComponentsText>
-            <ComponentsText>Range Rover</ComponentsText>
-            <ComponentsText>Lexus</ComponentsText>
-            <ComponentsText>Tesla</ComponentsText>
-            <ComponentsText>Bugatti</ComponentsText>
+            {links[0].map((item, i) => (
+              <Link
+                to={`/inventory?brands=${item.link}`}
+                className="link flex aic jcc"
+              >
+                <ComponentsText>{item.link}</ComponentsText>
+              </Link>
+            ))}
           </Child>
           <HrCon className="flex bsbb aic jcc w100">
             <Hr />
           </HrCon>
           <Child className="flex bsbb aifs jcc fdc">
             <GreetingsTextHeader>Features</GreetingsTextHeader>
-            <ComponentsText>Electric</ComponentsText>
-            <ComponentsText>Hybrid Electric</ComponentsText>
-            <ComponentsText>Range</ComponentsText>
-            <ComponentsText>Performance</ComponentsText>
+            {links[1].map((item, i) => (
+              <Link
+                to={`/inventory?brands=${item.link}`}
+                className="link flex aic jcc"
+              >
+                <ComponentsText>{item.link}</ComponentsText>
+              </Link>
+            ))}
             {/* <ComponentsText></ComponentsText>
             <ComponentsText></ComponentsText> */}
           </Child>

@@ -3,6 +3,7 @@ import {useState,useEffect} from 'react'
 import styled from 'styled-components';
 import Step1 from '../Components/Dealer/Step1'
 import Header from '../Components/Home/Header'
+import { tablet } from '../responsive';
 // import Step1 from '../Components/Dealer/Step1'
 
 const Container = styled.div`
@@ -13,18 +14,20 @@ const Container = styled.div`
    padding:0 14vh;
    margin-bottom:20px;
 //    padding-bottom:80px;
+${tablet({ padding: "0 4vh" })}
 `
 const Navbar = styled.div`
 
 `
 const HeaderTop = styled.div`
-background:black;
-padding: 0 14vh ;
-box-sizing:border-box;
-`
+  background: black;
+  // padding: 0 14vh;
+  box-sizing: border-box;
+`;
 const HeaderBottom = styled.div`
-   padding:10px 14vh  ;
+  //  padding:10px 14vh  ;
    margin:15px 0;
+   box-sizing:border-box;
 `
 const HeaderBigText = styled.span`
    font-size:26px;
@@ -41,9 +44,16 @@ const Hr = styled.hr`
 
 `
 
+const BigTextCon = styled.div`
+  text-overflow: ellipsis;
+`;
 const BigText = styled.span`
    font-size:19px;
    font-weight:400;
+   text-align:center;
+   
+  text-overflow: ellipsis;
+   ${tablet({fontSize:'17px'})}
 `
 const SmText = styled.span``
 const ProgressStepsCon = styled.div`
@@ -65,6 +75,7 @@ function SellerSignup({ route }) {
 
   return (
     <Container>
+      <Wrapper>
         <Navbar className=" aic jcsb fdc w100 bsbb p014vh">
           <HeaderTop className="flex aic jcsb w100">
         <Header/>
@@ -76,12 +87,13 @@ function SellerSignup({ route }) {
             <HeaderText cl="#909fbd">KarBox</HeaderText> */}
           {/* <Hr /> */}
           <HeaderBottom className="flex aifs jcfs w100 fdc">
+            <BigTextCon >
             <BigText className="flex aifs jcfs w100 v">
               Register and start selling today-create your own seller account
             </BigText>
+            </BigTextCon>
           </HeaderBottom>
         </Navbar>
-          <Wrapper>
         <ProgressStepsCon className="flex aifs jcfs w100 ">
           <ProgressSteps>
             <ProgressStepsText

@@ -1,33 +1,38 @@
 import styled from "styled-components";
-import {mobile} from "../responsive";
+import {mmobile, mobile} from "../responsive";
 // import JumiaStar from ".././images/jumia_star.png";
 import { Link } from "react-router-dom";
+import bg from ".././images/download-2 (3).jpg";
 
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  background-color: red;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
-      center;
+    url(${(props) => props.bg}) center;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const Wrapper = styled.div`
-  width: 25%;
-  padding: 20px;
+  // background:url(${(props) => props.bg});
+  background-repeat: no-repeat;
+  background-size: 100vh 1oovh;
+  `;
+  
+  const Wrapper = styled.div`
+  ${mmobile({width:'80%'})}
+  width: 40%;
+  height:50%;
+  padding:40px 20px;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction:column;
-  ${mobile({ width: "75%" })}
 `;
 
 const Text = styled.p`
@@ -74,6 +79,7 @@ const A = styled.a`
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
+  color:purple;
 `;
 
 const Agreement = styled.span`
@@ -84,20 +90,16 @@ const Agreement = styled.span`
   align-items: center;
 `;
 
-const JumiaStar_Img = styled.img`
-  max-width: 20%;
-`;
-
 const Login = () => {
   return (
-    <Container>
+    <Container bg={bg} >
       <Wrapper>
         {/* <JumiaStar_Img src={JumiaStar} alt="" /> */}
         <Title fz="19px" fw={600}>
           Welcome back!
         </Title>
         <Title fz="13px" fw={200}>
-          log in to your jumia account{" "}
+          log in to your karbox account{" "}
         </Title>
         <Form>
           <Input placeholder="username" />

@@ -6,6 +6,7 @@ import tab3 from "../../images/tab3.png";
 import tab4 from "../../images/tab4.png";
 import ProductDescription from "./ProductDescription";
 import ProductDeliveryOptions from "./ProductDeliveryOptions";
+import { mmobile, tablet } from "../../responsive";
 
 const ProductDSelectionCon = styled.div`
   width: 100%;
@@ -13,7 +14,6 @@ const ProductDSelectionCon = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  margin-bottom: 100px;
   background: white;
   box-shadow: -1.04px 4.891px 20px 0px rgb(69 49 183 / 27%);
 `;
@@ -32,7 +32,7 @@ const ProductDetails = styled.div`
 const ProductInfo_Wrapper = styled.div`
 background-color: #ebf2ff;
 display:flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
 align-items:center;
 justify-content:space-between;
 width:80%;
@@ -52,14 +52,23 @@ const Details = styled.div`
   flex: 1;
   margin: 8px;
   cursor: pointer;
+  ${tablet({padding:'2px 6px'})};
+  ${mmobile({margin:'2px'})};
 `;
-const Details_ImgCon = styled.div``;
+const Details_ImgCon = styled.div`
+  ${mmobile({display:'none'})}
+`;
 const DetailsImg = styled.img`
   max-width: 90%;
+  width:100%;
+  width:40px;
   margin: 5px;
 `;
 const DetailsTxt = styled.p`
   font-weight: 400;
+  margin:0 8px;
+  white-space:nowrap;
+  ${tablet({fontSize:'12px'})}
 `;
 
 const SetProductDetails = styled.div`

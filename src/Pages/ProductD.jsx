@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import Footer from "../Components/Home/Footer";
 import Product_HomeSection from "../Components/Product/Product_HomeSection";
-import { Laptop, mobile, tablet } from "../responsive";
+import { Laptop, ltablet, mmobile, mobile, tablet } from "../responsive";
 import MobileHeader from "../Components/Home/MobileHeader";
 import MobileBottom from "../Components/Home/MobileBottom";
 import {
@@ -38,7 +38,11 @@ const Container = styled.div`
   background-size: cover;
   box-sizing: border-box;
   position: relative;
-  width:80%;
+  // width: 80%;
+  // padding:0 4vh;
+  ${mobile({ padding: "0 4vh" })};
+  ${ltablet({ padding: "0 3vh" })};
+  ${mmobile({ padding: "0" })};
 `;
 const HeaderCon = styled.div`
   position: sticky;
@@ -50,16 +54,13 @@ const HeaderCon = styled.div`
   ${tablet({ padding: "0 4vh" })};
   ${Laptop({ padding: "0 4vh" })};
     ${mobile({ padding: "0 4vh" })};
+    ${mmobile({display:'none'})}
     box-sizing:border-box;
 `;
 
-const DetailsCon = styled.div`
-   margin-bottom:40px;
-`
-const Details = styled.div`flex:1;width:100%;`
 const FooterCon = styled.div`
 background: url(./footer-bg.jpg);
-background:black;
+// background:black;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -247,13 +248,6 @@ function ProductD() {
               makeanoffer={makeanoffer}
               setMakeanoffer={setMakeanoffer}
             />
-            <DetailsCon className="flex aifs jcsb wrap w100">
-              <Details className="flex aifs jcsb fdc ">
-                <Negotiate className="flex1 w100" />
-                <VendorDetails />
-              </Details>
-              <Details />
-            </DetailsCon>
             {/* <MakeOffer makeanoffer={makeanoffer} setMakeanoffer={setMakeanoffer} /> */}
             <ProductDSelection />
           </Container>

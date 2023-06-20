@@ -1,10 +1,8 @@
 .App {
   box-sizing: border-box;
-
   /* padding: 0 14vh; */
   /* customerLinks */
 }
-FindProducts
 ::-webkit-scrollbar-thumb {
   background-color: orangered;
   border-radius: 10px;
@@ -24,6 +22,7 @@ FindProducts
   background-color: transparent;
   border-radius: 10px;
   height:10px;
+
 }
 #ChatDasboard::-webkit-scrollbar-track {
   /* background-color: whitesmoke; */
@@ -675,13 +674,39 @@ input {
 #vendor_messageInput:focus {
   border: 1px solid orangered;
 }
+ @media only screen and (max-width: 1024px) {
+  .ProductDetails:first-of-type {
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+  }
+}
+ @media only screen and (max-width: 458px) {
+ .vendorDetailsChatIcon{
+  font-size: 10px;
+ }
+ #InventoryIcon{
+  font-size: 16px;
+ }
+ #InventoryIconCaret{
+  font-size: 22px;
+ }
+}
+@media only screen and (max-width:520px) {
+  #FooterMobile{
+    display:none;
+  }
+  #FooterIcons{
+    font-size:12px;
+  }
+}
 
 /* negotiate_messageInput */
 
 /* @media only screen and (max-width: 380px) {
-  #dis_icon {
+  .ProductDetails {
     font-size: 10px;
   }
+
 
   #PPM_ic {
     font-size: 13px;

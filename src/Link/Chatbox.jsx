@@ -6,10 +6,11 @@ import {
   RemoveOutlined
 } from "@mui/icons-material";
 import { Alert, Skeleton } from "@mui/material";
+import { useRef } from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 const Container = styled.div`
-  position: relative;
+  // position: absolute;
   //   left: 80px;
   //   bottom: 50px;
   z-index: 100;
@@ -158,11 +159,14 @@ const currentTime = new Date();
          minute:'2-digit',
     })
 
-  const handleSend = () => {
+    const inputRef = useRef();
+  function handleSend() {
+    const inputVal = inputRef.current || document.getElementById("inputRef").value;
     setvalue(inputvalue)
     setInputValid(true)
     console.log('new'+ inputvalue)
     const data = inputvalue;
+    inputVal.value=''
 
     setnewMessage((old)=>[...old,{message:data}])
 
@@ -176,7 +180,22 @@ const currentTime = new Date();
       setLoaded(true);
     }, 8000);
   }, []);
- 
+ let offsetX, offsetY;
+ const moveWindow = (event) => {
+   const eventTarget = event.target;
+   eventTarget.style.left = `${event.pageX - offsetX}px`;
+   eventTarget.style.top = `${event.pageY - offsetY}px`;
+ };
+ const addWindow = (event) => {
+   const eventTarget = event.target;
+   offsetX = event.clientX - eventTarget.getBoundingClientRect().left;
+   offsetY = event.clientY - eventTarget.getBoundingClientRect().top;
+   eventTarget.addEventListener("mousemove", moveWindow);
+ };
+ const removeWindow = (event) => {
+   const eventTarget = event.target;
+   eventTarget.removeEventListener("mousemove", moveWindow);
+ };
 
 const handleClose = ()=>{
   setShowChatbox(false);
@@ -184,7 +203,7 @@ const handleClose = ()=>{
 }
 
   return (
-    <Container>
+    <Container onMouseDown={addWindow} onMouseUp={removeWindow}>
       {/* {}
       <> */}
       {loading && (
@@ -194,28 +213,27 @@ const handleClose = ()=>{
           </Alert>
         </AlertCon>
       )}
-        <Header className="flex aic jcsb w100 bsbb">
-          <HeaderLeft className="flex aic jcfs ">
-            <HeaderText className="flex aic jcc">Robot</HeaderText>
-          </HeaderLeft>
-          <HeaderRight className="flex aic jcfe">
-            <RemoveOutlined
-              sx={{ margin: "0 5px", fontSize: "19px" }}
-              onClick={() => setShowChatbox('min')}
-            />
-            <Close
+      <Header className="flex aic jcsb w100 bsbb">
+        <HeaderLeft className="flex aic jcfs ">
+          <HeaderText className="flex aic jcc">Robot</HeaderText>
+        </HeaderLeft>
+        <HeaderRight className="flex aic jcfe">
+          <RemoveOutlined
+            sx={{ margin: "0 5px", fontSize: "19px" }}
+            onClick={() => setShowChatbox("min")}
+          />
+          <Close
             sx={{ margin: "0 5px", fontSize: "19px" }}
             // onClick={() => setShowChatbox(false),clearStogage}
             onClick={handleClose}
-            
           />
-          </HeaderRight>
-        </Header>
+        </HeaderRight>
+      </Header>
       <Wrapper className="flex aifs jcfs fdc">
-      <GetTimeCon className="flex aicc jcc w100">
-            <GetTime>Chat started at {time} </GetTime>
-          </GetTimeCon>
-          {/* <LiveChatwrapper> */}
+        <GetTimeCon className="flex aicc jcc w100">
+          <GetTime>Chat started at {time} </GetTime>
+        </GetTimeCon>
+        {/* <LiveChatwrapper> */}
         <LiveChatCon type="send" className="flex aic jcc ">
           {!loading ? (
             <LiveBotCon>
@@ -243,7 +261,6 @@ const handleClose = ()=>{
               sx={{ height: "40px", margin: "0 7px", width: "100%" }}
             />
           )}
-
         </LiveChatCon>
         <LiveChatCon type="send" className="flex aic jcfs w100 ">
           {!loading ? (
@@ -270,53 +287,59 @@ const handleClose = ()=>{
             />
           )}
         </LiveChatCon>
-          {newMessage.map((item)=>(
-            <>
-            {item.message == undefined ? '' :
-            <LiveChatCon type="recieve" className="flex fdrr aic jcfs w100 ">
-          {!loading ? (
-            <LiveBotCon>
-              <Person />
-            </LiveBotCon>
-          ) : (
-            <Skeleton
-              sx={{ borderradius: "50%" }}
-              width={30}
-              height={30}
-              borderradius={50}
-              variant="rounded"
+        {newMessage.map((item, i) => (
+          <>
+            {item.message && (
+              <LiveChatCon
+                key={i}
+                type="recieve"
+                className="flex fdrr aic jcfs w100 "
+              >
+                {!loading ? (
+                  <LiveBotCon>
+                    <Person />
+                  </LiveBotCon>
+                ) : (
+                  <Skeleton
+                    sx={{ borderradius: "50%" }}
+                    width={30}
+                    height={30}
+                    borderradius={50}
+                    variant="rounded"
+                  />
+                )}
+                {!loading ? (
+                  <LiveChatMessageCon>
+                    <LiveChatMessage>{item.message}</LiveChatMessage>
+                  </LiveChatMessageCon>
+                ) : (
+                  <Skeleton
+                    variant="rectanglar"
+                    sx={{ height: "40px", margin: "0 7px", width: "100%" }}
+                  />
+                )}
+              </LiveChatCon>
+            )}
+          </>
+        ))}
+        {/* </LiveChatwrapper> */}
+        {/* <ReplyWrapper> */}
+        <hr id="hr" />
+        <ReplyCon className="flex aic jcsa">
+          <ReplyInputCon>
+            <ReplyInput
+              id="inputRef"
+              ref={inputRef}
+              placeholder="enquiry"
+              onChange={(e) => {
+                setinputvalue(e.target.value);
+              }}
             />
-          )}
-          {!loading ? (
-            <LiveChatMessageCon>
-              <LiveChatMessage>{item.message}</LiveChatMessage>
-            </LiveChatMessageCon>
-          ) : (
-            <Skeleton
-              variant="rectanglar"
-              sx={{ height: "40px", margin: "0 7px", width: "100%" }}
-            />
-          )}
-        </LiveChatCon>
-        }
-        </>
-            ))}
-            {/* </LiveChatwrapper> */}
-      {/* <ReplyWrapper> */}
-      <hr id='hr' />
-      <ReplyCon className="flex aic jcsa">
-        <ReplyInputCon>
-          <ReplyInput
-            placeholder="enquiry"
-            onChange={(e) => {
-              setinputvalue(e.target.value);
-            }}
-          />
-        </ReplyInputCon>
-        <Send onClick={handleSend} sx={{cursor:'pointer'}} />
-      </ReplyCon>
-      {/* </ReplyWrapper> */}
-              </Wrapper>
+          </ReplyInputCon>
+          <Send onClick={handleSend} sx={{ cursor: "pointer" }} />
+        </ReplyCon>
+        {/* </ReplyWrapper> */}
+      </Wrapper>
       {/* </> */}
     </Container>
   );

@@ -18,13 +18,13 @@ const Wrapper = styled.div`
   //  padding-right: 6vh;
 `;
 const WrapperLeft = styled.div`
-  //  flex:1;
+   flex:1;
   position: sticky;
   top: 0;
-  //  margin-right:65px;
+   margin-right:25px;
 `;
 const WrapperRight = styled.div`
-  flex: 3;
+  flex: 4;
 `;
 function DealerDashboard({ route }) {
   return (

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mmobile, tablet } from "../../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -7,21 +8,44 @@ const Container = styled.div`
 const Header = styled.div`
   margin-bottom: 20px;
 `;
-const HeaderTxt = styled.h1``;
+const HeaderTxt = styled.span`
+  font-size:29px;
+${tablet({fontSize:'24px'})};
+${mmobile({fontSize:'14px'})};
+`;
 const ProductTable = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   display: flex;
 `;
 const Table = styled.table`
-  flex-wrap: wrap;
-  width: 70%;
+  width: 100%;
   border: 1px solid #eaeaea;
   border-collapse: collapse;
-  display: flex;
-  flex-wrap: wrap;
+  display: display;
+  // flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+
+  div {
+    width: 240px;
+  }
+
+  div span {
+    margin: 5px 6px;
+    width: 120px;
+    ${mmobile({fontSize:'12px'})}
+  }
+
+  div:nth-child(odd) {
+    background: #eee;
+  }
+  div span:nth-child(even) {
+    &:before {
+      content: " :";
+      margin-right: 10px;
+    }
+  }
 `;
 const Tbody_Tr = styled.div`
   display: flex;
@@ -30,48 +54,56 @@ const Tbody_Tr = styled.div`
   // flex-direction:column;
   justify-content: center;
 `;
-const Tbody = styled.tbody`
+const Tbody = styled.div`
   // display: flex;
   width: 100%;
   // flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 `;
-const Tr = styled.tr`
+const Tr = styled.div`
   width: 100%;
+  flex: 1;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  flex-direction: column;
   padding: 20px 0;
+  // min-width:150px;
 `;
-const Th = styled.th`
+const Th = styled.div`
   font-weight: 400;
-  margin-left: 5px;
+  // margin-left: 5px;
   flex: 2;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 `;
-const Td = styled.td`
+const Td = styled.span`
   flex: 1;
 
   &:before {
-    content: " :";
-    margin-right: 10px;
+    // content: " :";
+    // margin-right: 10px;
   }
 `;
 
 const ProductInfo_Con = styled.div``;
 const ProductInfo = styled.div`
-  margin:20px 0;
+  margin: 20px 0;
+  ${mmobile({ margin: "8px 0" })}
 `;
-const InfoHeader_Text = styled.h2`
-   font-size:23px;
-   font-weight:500;
+const InfoHeader_Text = styled.span`
+  font-size: 23px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  ${tablet({ fontSize: "19px" })}
+  ${mmobile({ fontSize: "13px" })}
 `;
-const InfoText = styled.p`
-  margin:20px 0;
-   color:grey;
+const InfoText = styled.span`
+  margin: 20px 0;
+  color: grey;
+  ${mmobile({ margin: "2px 0",fontSize:'10px' })}
 `;
 
 function ProductDescription() {
@@ -82,48 +114,38 @@ function ProductDescription() {
       </Header>
       <ProductTable>
         <Table className="product-info-Table">
-          <Tbody>
-            <Tbody_Tr>
-              <Tr>
-                <Th>Condition </Th>
-                <Td>New</Td>
-              </Tr>
-              <Tr>
-                <Th>Mileage </Th>
-                <Td>15,000 miles</Td>
-              </Tr>
-            </Tbody_Tr>
-            <Tbody_Tr>
-              <Tr className="ev">
-                <Th>Year</Th>
-                <Td>09-2017</Td>
-              </Tr>
-              <Tr className="ev">
-                <Th>Engine </Th>
-                <Td>I-4 1,5 l</Td>
-              </Tr>
-            </Tbody_Tr>
-            <Tbody_Tr>
-              <Tr>
-                <Th>Fuel </Th>
-                <Td>Regular</Td>
-              </Tr>
-              <Tr>
-                <Th>Transmission </Th>
-                <Td>Automatic</Td>
-              </Tr>
-            </Tbody_Tr>
-            <Tbody_Tr>
-              <Tr className="ev">
-                <Th>Color </Th>
-                <Td>Blue</Td>
-              </Tr>
-              <Tr className="ev">
-                <Th>Doors </Th>
-                <Td>5</Td>
-              </Tr>
-            </Tbody_Tr>
-          </Tbody>
+          <div className="flex aifs jcsb w100 ">
+            <span>Condition </span>
+            <span className="flex aifs jcfs w100">New</span>
+          </div>
+          <div className="flex aifs jcsb w100 ">
+            <span>Mileage </span>
+            <span className="flex aifs jcfs w100">15,000 miles</span>
+          </div>
+          <div className="flex aifs jcsb w100 ">
+            <span>Year</span>
+            <span className="flex aifs jcfs w100">09-2017</span>
+          </div>
+          <div className="flex aifs jcsb w100 ">
+            <span>Engine </span>
+            <span className="flex aifs jcfs w100">I-4 1,5 l</span>
+          </div>
+          <div className="flex aifs jcsb w100 ">
+            <span>Fuel </span>
+            <span className="flex aifs jcfs w100">Regular</span>
+          </div>
+          <div className="flex aifs jcsb w100 ">
+            <span>Transmission </span>
+            <span className="flex aifs jcfs w100">Automatic</span>
+          </div>
+          <div className="flex aifs jcsb w100 ">
+            <span>Color </span>
+            <span className="flex aifs jcfs w100">Blue</span>
+          </div>
+          <div className="flex aifs jcsb w100 ">
+            <span>Doors </span>
+            <span className="flex aifs jcfs w100"> 5</span>
+          </div>
         </Table>
       </ProductTable>
       <ProductInfo_Con>

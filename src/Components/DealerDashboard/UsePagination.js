@@ -1,3 +1,28 @@
+import { useMemo } from "react"
+
+export const UsePagination = ({
+    totalCount,
+    PageSize,
+    siblingCount = 1,
+    currentPage
+})=>{
+    const paginationRange = useMemo(() => {
+        const totalPageCount = Math.ceil(totalCount/PageSize);
+
+        const totalPageNBumbers = siblingCount + 5;
+
+        if(totalPageNBumbers>=totalPageCount){
+            return Range(1,totalPageCount)
+        };
+        const leftSiblingIndex = Math.max(currentPage-siblingCount,1);
+        const rightiblingIndex = Math.min(currentPage+siblingCount,totalPageCount);
+    }, []);
+    return paginationRange;
+}
+
+
+
+
 import {
   ChevronLeft,
   ChevronRight,
@@ -9,18 +34,16 @@ import styled from "styled-components";
 import { mmobile, mobile, tablet } from "../../responsive";
 const Container = styled.div`
   position: relative;
-
 `;
 const Wrapper = styled.div`
- position: relative;
+  position: relative;
 `;
 const ImageSliderCon = styled.div`
   box-sizing: border-box;
   padding-right: 10px;
-  ${mmobile({padding:'0'})}
+  ${mmobile({ padding: "0" })}
 `;
-const ImageSlider = styled.div`
-`;
+const ImageSlider = styled.div``;
 const ImageSliderImg = styled.img`
   max-width: 100%;
 `;
@@ -68,9 +91,9 @@ const Button = styled.div`
 
 const MobileControls = styled.div`
   position: absolute;
-  display:none;
-  padding:5px 0;
-${mmobile({display:'flex'})}
+  display: none;
+  padding: 5px 0;
+  ${mmobile({ display: "flex" })}
 `;
 const MobileControlsLeft = styled.div``;
 const MobileControlsRight = styled.div``;
@@ -82,9 +105,9 @@ const MobileControlsIcons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left:10px;
+  margin-left: 10px;
   cursor: pointer;
-  font-size:10px;
+  font-size: 10px;
 `;
 const ProductInfoCon = styled.div`
   display: none;
@@ -93,8 +116,8 @@ const ProductInfoCon = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   width: 100%;
-  box-sizing:border-box;
-  padding:0 1vh;
+  box-sizing: border-box;
+  padding: 0 1vh;
   // margin-top: 50px;
   ${mmobile({ display: "flex" })}
 `;
@@ -156,6 +179,7 @@ const PagNumTextCon = styled.div``;
 const PagNumText = styled.span`
   // font-size:100px;
 `;
+
 function Gallery() {
   const images = [
     {
@@ -203,16 +227,13 @@ function Gallery() {
   const ImgPagConRef = useRef();
   const ImgPagWrapRef = useRef();
   const CountRef = useRef(0);
-    const slideLength = images.length + 1;
-    // const CurrentSlide = 1;
-    const [CurrentSlide,setCurrentSlide]=useState()
+  const slideLength = images.length + 1;
+  const CurrentSlide = 1;
 
-const handleClick = (slide) => {
-  CurrentSlide = slide + 1;
-  ImgPagRef.addEventListiner('click',)
-  console.log(slide)
-  alert()
-};
+  const handleClick = (slide) => {
+    CurrentSlide = slide + 1;
+  };
+
   const handleClickLeft = (direction) => {
     if (!(CountRef.current - 1 < 0)) {
       ImgPagConRef.current.style.transform = `translateX(-${
@@ -232,7 +253,7 @@ const handleClick = (slide) => {
 
   return (
     <Container>
-      <Wrapper className="flex aifs jcfs fdc w100 ">
+      <Wrapper className="flex aife jcsb fdc w100 ">
         <MobileControls className=" aifs jcsb w100">
           <MobileControlsLeft className="flex aic jcsb w100">
             <MobileControlsIcons>
@@ -248,13 +269,14 @@ const handleClick = (slide) => {
             </MobileControlsIcons>
           </MobileControlsRight>
         </MobileControls>
+
         <ImageSliderCon className="flex aife jcfs">
-          <PagNum>
+          {/* <PagNum>
             <PagNumTextCon>
               <PagNumText>{CurrentSlide}</PagNumText>/
               <PagNumText>{slideLength}</PagNumText>
             </PagNumTextCon>
-          </PagNum>
+          </PagNum> */}
           <ImageSlider className="flex aic jcc">
             <ImageSliderImg
               src={require("../../images/Lexus-LCert_WSE-Homepage-Tile-750x750.jpeg")}
@@ -278,7 +300,7 @@ const handleClick = (slide) => {
             >
               {images.map((item, i) => (
                 <ImageSliderPag
-                  onClick={ handleClick}
+                  onClick={() => handleClick(i)}
                   ref={ImgPagRef}
                   className=""
                   key={i}

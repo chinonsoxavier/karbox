@@ -20,9 +20,9 @@ import { useState } from "react";
 import { IconButton, Tooltip } from "@mui/material";
 
 const Container = styled.div`
-  max-width: 320px;
-  min-width:0px;
-  width:290px;
+  // max-width: 320px;
+  // min-width:0px;
+  width:100%;
   padding: 0 20px;
 `;
 const Wrapper = styled.div`
@@ -81,6 +81,7 @@ const RouteCon = styled.div`
 const Route = styled.div`
   color: grey;
   padding: 15px 8px;
+  box-sizing:border-box;
 
   &:hover {
     animation-name: ${Animation};

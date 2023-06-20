@@ -10,12 +10,15 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Img from "../../images/01 (3).png";
 import MakeOffer from "./MakeOffer";
+import { mmobile } from "../../responsive";
 const Container = styled.div`
   box-shadow: -1.04px 4.891px 20px 0px rgb(69 49 183 / 27%);
   padding: 20px 30px;
 padding:30px;
     width:100%;
+    position:relative;
   flex: 1;
+  ${mmobile({padding:'15px'})}
 `;
 const Wrapper = styled.div``;
 const VendorDetailsText = styled.span`
@@ -61,6 +64,8 @@ const Button = styled.button`
   //   margin-top: 20px;
   width: 100%;
   margin: 5px 0;
+
+  ${mmobile({margin:'2px 0',padding:'3px 20px'})}
 `;
 
 const SendChatCon = styled.div``;
@@ -178,6 +183,7 @@ function VendorDetails() {
             <SendChatHeader className="flex aifs jcsb w100">
               <SendChatText>Your message</SendChatText>
               <CloseOutlined
+              className="vendorDetailsChatIcon"
                 sx={{ fontSize: "15px", cursor: "pointer" }}
                 onClick={() => setstartChart(false)}
               />

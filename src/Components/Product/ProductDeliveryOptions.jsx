@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mmobile, tablet } from "../../responsive";
 
 const Container = styled.div`
   width:100%;
@@ -7,6 +8,7 @@ const Container = styled.div`
 const Text = styled.h2`
    font-weight:500;
    margin-bottom:15px ;
+   ${tablet({fontSize:'16px'})};
 `
 
 const TableCon = styled.div`
@@ -16,7 +18,7 @@ const TableCon = styled.div`
 `;
 const Table = styled.table`
   flex-wrap: wrap;
-  width: 70%;
+  width: 100%;
   border: 1px solid #eaeaea;
   border-collapse: collapse;
   display: flex;
@@ -35,7 +37,7 @@ const Tr = styled.tr`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 20px 0;
-
+  ${mmobile({flexDirection:'column',padding:'10px 0'})};
   &:nth-child(even) {
      background-color: #ebf2ff; 
   }
@@ -48,25 +50,31 @@ const Th = styled.th`
   align-items: flex-start;
   justify-content: flex-start;
   white-space: nowrap;
+  ${tablet({fontSize:'12px'})};
+
+  &:after {
+    content: " :";
+    margin-left: 10px;
+  }
 `;
 const Td = styled.td`
   flex: 1;
   white-space:nowrap;
-  &:before {
-    content: " :";
-    margin-right: 10px;
-  }
+  ${tablet({fontSize:'12px'})};
+  ${mmobile({marginLeft:'5px'})};
 `;
 
 const Notes = styled.div`
-  margin:30px 0;  
-`
-const Notes_HeaderTxt = styled.h2`
+  margin: 30px 0;
+  ${mmobile({ margin: "12px 0" })};
+`;
+const Notes_HeaderTxt = styled.span`
 font-weight:500;
 margin-bottom:10px;
 `
 const Notes_Txt = styled.p`
 color:grey;
+${mmobile({fontSize:'12px'})};
 `
 
 

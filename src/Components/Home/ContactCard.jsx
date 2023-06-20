@@ -1,41 +1,48 @@
 import styled from "styled-components";
 import Button from "./Button";
 import {LocationOnTwoTone,Mail,PhoneTwoTone} from '@mui/icons-material'
-import { Laptop, mobile, tablet } from "../../responsive";
+import { Laptop, lmobile, mobile, tablet } from "../../responsive";
 const Container = styled.div`
-   margin:50px 0;
-padding:20px 0;
-   ${mobile({display:'none'})}
-`
+  margin: 50px 0;
+  padding: 20px 0;
+  ${mobile({ display: "none" })};
+  ${lmobile({margin:'0'})};
+`;
 const Wrapper = styled.div`
    width:100%;
    ${tablet({flexDirection:'column',justifyContent:'flex-start'})}
 `
 const LeftCon = styled.div`
   padding: 15px 35px;
-  box-sizing:border-box;
-  // ${Laptop({maxWidth:'700px'})}
+  box-sizing: border-box;
+  ${lmobile({ padding:'6px 17px',boxSizing:'border-box'})};
+  // ${Laptop({ maxWidth: "700px" })}
 `;
 
 const Header = styled.div``
 const HeaderText = styled.span`
   color: black;
-  font-size:20px;
+  font-size: 20px;
+  ${lmobile({ fontSize:'15px'})};
 `;
-const Header2 = styled.div``
+const Header2 = styled.div`
+  margin:7px 0;
+`
 const HeaderText2 = styled.span`
   color: black;
-  font-size:18px;
+  font-size: 18px;
+  ${lmobile({ fontSize:'13px' })};
 `;
 const Form = styled.div`
 width:100%;
 `
 const InputCon = styled.div`
-  width:100%;
-  flex:1;
-  min-width:440px;
-  margin:5px ;
-  `
+  width: 100%;
+  flex: 1;
+  min-width: 440px;
+  ${lmobile({ minWidth:'240px',margin:'2px'})};
+  margin: 5px;
+`;
   const Input = styled.input`
    border-bottom:1px solid #eee;
    width:100%;
@@ -72,16 +79,16 @@ const ContactInfoTextActive = styled.div`
 
 function ContactCard() {
   return (
-    <Container>
-      <Wrapper className="flex aic jcsa">
-        <LeftCon className="bgw flex aic jcc fdc">
+    <Container className="">
+      <Wrapper className="flex aic jcsa ">
+        <LeftCon className="bgw flex aic jcc fdc ">
           <Header>
             <HeaderText>Ready to Join Our Network?</HeaderText>
           </Header>
           <Header2 className="flex aic jcfs w100" >
             <HeaderText2>For Immediate Assistance Call 88-480-1313</HeaderText2>
           </Header2>
-          <Form className="flex aic jcc wrap bgw">
+          <Form className="flex aic jcc wrap ">
             <InputCon className="ContactCardInput" >
               <Input  type="text" placeholder="First Name*" />
             </InputCon>

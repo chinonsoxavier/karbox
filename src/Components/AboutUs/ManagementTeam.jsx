@@ -8,6 +8,7 @@ const Container = styled.div`
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
+  height:max-content;
   background-color: #f1f3fd;
   margin: 100px 0;
   padding: 30px 5vh;
@@ -44,8 +45,9 @@ const TeamsContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width:100%;
-  height:100%;
-  ${tablet({flexDirection:'column'})}
+  height:max-content;
+  // background:red;
+  flex-wrap:wrap;
 
 `;
 const Team = styled.div`
@@ -57,9 +59,13 @@ const Team = styled.div`
   justify-content: center;
   flex-direction:column;
   height:max-content;
-  max-width:200px;
+  max-width:280px;
+  background:white;
+  min-width:200px;
+  width:100%;
   border-radius:15px;
-  ${tablet({margin:'10px 0',marginBottom:'90px',width:'260px'})}
+  margin-top:90px;
+  ${tablet({margin:'10px 6px',marginBottom:'90px',width:'220px'})}
 `;
 const TeamImgCon = styled.div`
   display: flex;
@@ -69,6 +75,7 @@ const TeamImgCon = styled.div`
   flex: 1;
   background-color: white;
   z-index: 1;
+  // margin-top:60px;
 `;
 const TeamImg = styled.img`
   margin-top: -60px;

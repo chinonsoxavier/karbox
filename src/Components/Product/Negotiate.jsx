@@ -2,17 +2,20 @@ import { CloseOutlined } from "@mui/icons-material";
 import {useState} from 'react'
 import { TextField } from "@mui/material";
 import styled from "styled-components";
+import { mmobile } from "../../responsive";
 const Container = styled.div`
   box-shadow: -1.04px 4.891px 20px 0px rgb(69 49 183 / 27%);
     padding: 20px 30px;
   margin: 20px 0;
 //   padding: 50px;
   width: 100%;
+  ${mmobile({padding:'10px 13px',margin:'10px 0'})}
 `;
 const NegotiateCon = styled.div``;
 const NegotiateText = styled.span`
   font-size: 28px;
   font-weight: 600;
+  ${mmobile({fontSize:'20px'})}
 `;
 const NegotiateButton = styled.button`
   padding: 10px 40px;
@@ -23,6 +26,7 @@ const NegotiateButton = styled.button`
   cursor: pointer;
   margin-top:10px;
   width:100%;
+  ${mmobile({padding:'5px 20px'})}
 `;
 
 const CallBackCon = styled.div``

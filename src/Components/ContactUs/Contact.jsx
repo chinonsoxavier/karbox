@@ -3,14 +3,19 @@ import styled from "styled-components";
 import {
   Close,
 } from "@mui/icons-material";
+import { CustomerBreakpoint } from "../../responsive";
 
 const Container = styled.div`
   padding: 0 35px;
   padding-bottom: 15px;
   flex: 1;
-  width: 480px;
+  width: 280px;
+  min-width:150px;
+  max-width:480px
   height: 440px;
   position: absolute;
+    ${CustomerBreakpoint({ width: "250px",left:'150px',marginTop:'120px' })}
+
 `;
 
 const Header = styled.div``;

@@ -6,11 +6,13 @@ export const smobile = (props)=>{
     ${props}
    }`
 }
+
+// should be //438
 export const mmobile = (props)=>{
    return css`
-   @media only screen and (max-width:438px){
-    ${props}
-   }`
+   @media only screen and (max-width:458px){ 
+   ${props}
+}`
 }
 export const mobile = (props)=>{
    return css`
@@ -51,6 +53,12 @@ export const Laptop = (props)=>{
 export const CustomerBreakpoint = (props)=>{
    return css`
    @media only screen and (max-width:650px){
+    ${props}
+   }`
+}
+export const InventoryBreakpoint = (props)=>{
+   return css`
+   @media only screen and (max-width:1099){
     ${props}
    }`
 }

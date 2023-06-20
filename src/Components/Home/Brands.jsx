@@ -2,6 +2,7 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { mmobile } from "../../responsive";
 const Container = styled.div`
   width: 100%;
   ]min-height: 900px;
@@ -30,6 +31,8 @@ const ProductsHeaderButton = styled.button`
   height: 100%;
   background: transparent;
   font-weight: 500;
+
+  ${mmobile({padding:'5px 12px',fontSize:'12px'})}
 `;
 
 const BrandsCon = styled.div`
@@ -37,13 +40,16 @@ const BrandsCon = styled.div`
 `;
 const Brand = styled.div`
   padding: 20px;
-  min-width: 130px;
+  // min-width: 130px;
+  max-width:140px;
+  width:130px;
   margin: 4px;
   flex:1;
   border: 1px solid #231f20;
   background: #231f20;
   transition: 1.5s all;
   //   box-shadow: -1.04px 4.891px 26px 1px #231f20;
+  ${mmobile({maxWidth:'60px',width:'120px'})}
 `;
 const BrandsImg = styled.img`
   width: 100%;
@@ -56,6 +62,7 @@ const BrandssButtonCon = styled.div`
 `;
 const BrandssButtonText = styled.div`
   font-weight: 500;
+  ${mmobile({fontSize:'11px'})}
 `;
 const BrandssButton = styled.button`
   border-radius: 16px;
@@ -241,7 +248,7 @@ const Brands = () => {
             </ProductsHeaderButton>
           </ProductsHeaderButtonWrapper>
         </ProductsHeaderButtonCon>
-        <BrandsCon className="flex aic  w100 jcsa w100 wrap">
+        <BrandsCon className="flex aic w100 jcc w100 wrap">
           {data.map((item, i) => (
             <div key={i}>
               {show === "less" && item.popular && (

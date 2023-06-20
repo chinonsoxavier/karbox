@@ -5,7 +5,6 @@ import {
   Twitter,
   WhatsApp,
   WifiCalling3Outlined,
-  
 } from "@mui/icons-material";
 import React, { useState } from "react";
 
@@ -15,8 +14,27 @@ import img2 from "../../images/auction-2.jpg";
 import img3 from "../../images/auction-2.jpg";
 import img4 from "../../images/auction-2.jpg";
 import MakeOffer from "./MakeOffer";
+import {
+  CustomerBreakpoint,
+  InventoryBreakpoint,
+  ltablet,
+  mmobile,
+  tablet,
+} from "../../responsive";
+import Gallery from "./Gallery";
+import Negotiate from "./Negotiate";
+import VendorDetails from "./VendorDetails";
+import Gallery2 from "./Gallery2";
 
-const Container = styled.div``
+const Container = styled.div`width:100%;`;
+const Wrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  ${InventoryBreakpoint({ flexDirection: "column" })};
+  ${CustomerBreakpoint({ flexDirection: "column" })};
+`;
 const ProductHomeSectionCon = styled.div`
   display: flex;
   align-items: center;
@@ -25,24 +43,27 @@ const ProductHomeSectionCon = styled.div`
   width: 100%;
   box-sizing: border-box;
   padding: 0 30px;
+  background:red;
+  ${mmobile({padding:'0'})}
   margin-bottom: 30px;
   background: white;
   padding-bottom: 30px;
   box-shadow: -1.04px 4.891px 20px 0px rgb(69 49 183 / 27%);
 `;
 
-
-
 const ProductInfoCon = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-wrap:wrap;
-  flex-direction:column;
+  flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
   // margin-top: 50px;
+  ${mmobile({display:'none'})}
 `;
-
+const GalleryCon = styled.div`
+  max-width: 500px;
+`;
 
 const ProductInfo = styled.div`
   display: flex;
@@ -58,59 +79,81 @@ const ProductInfoTop = styled.div`
 
 const ImageGalleryCon = styled.div`
   //  height:900px;
-`
-const ImageGallery= styled.div`
-// height:600px;
-position:relative;
-`
+  flex: 2;
+`;
+const ImageGallery = styled.div`
+  // max-height:500px;
+  position: relative;
+  height: 100%;
+  // flex:1;
+  max-width: 400px;
+  ${InventoryBreakpoint({ maxWidth: "300px" })}
+`;
 const ImageGalleryImageCon = styled.div`
   // & :nth-child(n-1){
   //   width:40px;
   // }
-  width:100%;
+  width: 100%;
 `;
-const ImageGalleryImage= styled.img`
-   width:100%;
-`
+const ImageGalleryImage = styled.img`
+  max-width: 100%;
+`;
 const ImageGalleryButtonCon = styled.div`
-position:absolute;
-bottom:24px;
-`
+  position: absolute;
+  bottom: 24px;
+`;
 const ImageGalleryImageButton = styled.button`
-  padding:8px;
-  border:none;
-  background:white;
-  border-radius:4px;
-`
+  padding: 8px;
+  border: none;
+  background: white;
+  border-radius: 4px;
+`;
 
-const ImageSliderCon = styled.div``
-const ImageSliderHeader = styled.div``
-const ImageSliderHeaderLeft = styled.div``
-const ImageSliderHeaderRight = styled.div``
+const ImageSliderCon = styled.div``;
+const ImageSliderHeader = styled.div``;
+const ImageSliderHeaderLeft = styled.div``;
+const ImageSliderHeaderRight = styled.div``;
 const ImageSliderHeaderIcon = styled.div`
-margin:0 7px;
-`
+  margin: 0 7px;
+`;
 const ImageSliderHeaderIconText = styled.span`
-   text-decoloration:underline;
-`
-const ImageSliderWrapper = styled.div``
-const ImageSlider = styled.div``
-const ImageSliderImg = styled.img``
+  text-decoloration: underline;
+`;
+const ImageSliderWrapper = styled.div`
+  height: 100%;
+  max-width: 500px;
+  // min-width: 400px;
+  ${InventoryBreakpoint({ maxWidth: "300px" })}
+`;
+const ImageSlider = styled.div`
+  // flex:1;
+  width: 100%;
+  // width:290px;
+  min-width: 550px;
+  ${InventoryBreakpoint({ width: "20px" })}
+`;
+const ImageSliderImg = styled.img`
+  max-width: 250px;
+  width: auto;
+`;
 
-const ProductName = styled.h1`
+const ProductName = styled.span`
   white-space: nowrap;
   font-size: 42px;
+  font-weight: 600;
+  ${tablet({ fontSize: "32px" })}
 `;
 const ProductInfoBottom = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin:15px 0;
+  margin: 15px 0;
 `;
-const ListingId = styled.p`
+const ListingId = styled.span`
   white-space: nowrap;
   color: grey;
   font-weight: 300;
+  ${tablet({ fontSize: "13px" })}
 `;
 const HR = styled.div`
   border-right: 2px solid gray;
@@ -118,47 +161,48 @@ const HR = styled.div`
   width: 2px;
   margin: 8px;
 `;
-const ItemId = styled.p`
+const ItemId = styled.span`
   white-space: nowrap;
   color: grey;
   font-weight: 300;
+  ${tablet({ fontSize: "13px" })};
 `;
 
-const ProductPrice = styled.div`
+const ProductPriceCon = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   border-radius: 5px;
   background-color: #ebf2ff;
   width: 100%;
-  max-width:700px;
-  // flex: 1;
-  padding:15px;
+  max-width: 700px;
+  padding: 15px;
+  ${tablet({ padding: "10px 10px" })}
   box-sizing: border-box;
+
+  span:first-of-type {
+    &::after {
+      margin: 0 6px;
+      content: ":";
+    }
+  }
 `;
 
-const ProductPriceLeft = styled.div`
+const ProductDetails = styled.div``;
+
+const ProductPrice = styled.div`
   flex: 1;
   text-align: left;
+  width: 100%;
 `;
 
-const ProductPriceRight = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  items-align: left;
-  text-align: right;
-  flex-direction: column;
-`;
-
-const ProductPriceLeftTxt = styled.p`
+const ProductPriceLeftTxt = styled.span`
   text-align: left;
-  font-size: ${(props) => props.fz};
-  font-weight: ${(props) => props.fw};
-  margin-bottom: ${(props) => props.mb};
-  margin-top: ${(props) => props.mt};
+  font-size: 35px;
+  font-weight: 500;
   color: ${(props) => props.cl};
+  ${ltablet({ fontSize: "23px" })}
+  ${mmobile({ fontSize: "18px" })}
 `;
 
 const AuctionTimeHr = styled.hr`
@@ -166,10 +210,11 @@ const AuctionTimeHr = styled.hr`
   background-color: #e0e0f1;
   width: ${(props) => props.wd};
   height: 1px;
-  margin: ${(props) => props.mg};
+  margin: 25px;
+  ${mmobile({margin:'6px'})}
 `;
 
-const ShowContactButtonCon = styled.div``
+const ShowContactButtonCon = styled.div``;
 const ShowContactButton = styled.button`
   padding: 10px 40px;
   border: none;
@@ -177,6 +222,7 @@ const ShowContactButton = styled.button`
   color: white;
   font-size: 14px;
   cursor: pointer;
+  ${mmobile({padding:'5px 40px'})}
 `;
 const MakeAnOfferButton = styled.button`
   padding: 10px 40px;
@@ -185,25 +231,36 @@ const MakeAnOfferButton = styled.button`
   color: orangered;
   font-size: 14px;
   cursor: pointer;
+
+  ${mmobile({padding:'5px 20px'})}
 `;
 
-const SocialIconCon = styled.div``
+const SocialIconCon = styled.div``;
 const SocialIcon = styled.div`
   background: ${(props) => props.bg};
   color: white;
   padding: 8px 15px;
-  margin:0 5px;
+  margin: 0 5px;
+  ${mmobile({padding:'3px 7px'})}
 `;
 
-
-
+const DetailsCon = styled.div`
+  margin-bottom: 40px;
+  ${ltablet({ flexDirection: "column" })}
+`;
+const Details = styled.div`
+  flex: 1;
+  padding: 0 6px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 200px;
+`;
 
 const ProductHomeSection = ({ makeanoffer, setMakeanoffer }) => {
-
   const [makeoffer, setmakeoffer] = useState(false);
   const [showcontact, setshowcontact] = useState(false);
-    const [thumbsSwiper, setThumbsSwiper] = useState({});
-const [slide,setSlide]=useState(0)
+  const [thumbsSwiper, setThumbsSwiper] = useState({});
+  const [slide, setSlide] = useState(0);
 
   const image = [
     {
@@ -226,7 +283,6 @@ const [slide,setSlide]=useState(0)
       id: 4,
       img: img4,
     },
-   
   ];
   const image2 = [
     {
@@ -289,99 +345,38 @@ const [slide,setSlide]=useState(0)
       id: 4,
       img: img4,
     },
-   
   ];
   return (
     <Container>
       {/* {show ? (
       
       ) : ( */}
-        <ProductHomeSectionCon>
-          <ProductInfoCon>
-            {/* <ProductInfoLeftCon> */}
-            <ProductInfo>
-              <ProductInfoTop>
-                <ProductName>The Breeze Zodiac IX</ProductName>
-              </ProductInfoTop>
-              <ImageGalleryCon className="flex aic jcc w100">
-                <ImageGallery className="w100 flex aic jcc wrap flex1">
-                  {image.map((item, i) => (
-                    <>
-                      {i === 0 && (
-                        <ImageGalleryImageCon
-                          style={{
-                            maxWidth: "100%",
-                            minWidth: "auto",
-                            width: "max-content",
-                            maxWidth: "515px",
-                            padding: "0",
-                          }}
-                          className="w100 flex aic jcc wrap"
-                        >
-                          <ImageGalleryImage
-                            src={require("../../images/Lexus-LCert_WSE-Homepage-Tile-750x750.jpeg")}
-                          />
-                        </ImageGalleryImageCon>
-                      )}
-                    </>
-                  ))}
-                </ImageGallery>
-                {/* </ImageGalleryCon> */}
-                {/* <ImageGalleryCon className="flex aic jcc" > */}
-                <ImageGallery className="w100 flex aife jcsb wrap bgr h100 flex">
-                  {image.map((item, i) => (
-                    <>
-                      {i > 0 && (
-                        <ImageGalleryImageCon
-                          className="w100 flex aic jcc wrap bsbb"
-                          style={{
-                            maxWidth: "265px",
-                            width: "50%",
-                            minWidth: "auto",
-                            paddingLeft: "3px",
-                            paddingTop: "3px",
-                          }}
-                        >
-                          <ImageGalleryImage
-                            src={require("../../images/Lexus-LCert_WSE-Homepage-Tile-750x750.jpeg")}
-                          />
-                        </ImageGalleryImageCon>
-                      )}
-                    </>
-                  ))}
-                  <ImageGalleryButtonCon className="flex aic jcc w100">
-                    <ImageGalleryImageButton
-                      className="flex aic jcc s"
-                      // onClick={() => setShow(true)}
-                    >
-                      <Apps sx={{ fontSize: "16px", margin: "0 3px" }} /> Show
-                      all photos
-                    </ImageGalleryImageButton>
-                  </ImageGalleryButtonCon>
-                </ImageGallery>
-              </ImageGalleryCon>
+      <ProductHomeSectionCon>
+        <ProductInfoCon>
+          {/* <ProductInfoLeftCon> */}
+          <ProductInfo>
+            <ProductInfoTop>
+              <ProductName>The Breeze Zodiac IX</ProductName>
+            </ProductInfoTop>
 
-              <ProductInfoBottom>
-                <ListingId>Listing ID: 14076242</ListingId>
-                <HR />
-                <ItemId>Item #: 7300-335686</ItemId>
-              </ProductInfoBottom>
-            </ProductInfo>
+            <ProductInfoBottom>
+              <ListingId>Listing ID: 14076242</ListingId>
+              <HR />
+              <ItemId>Item #: 7300-335686</ItemId>
+            </ProductInfoBottom>
+          </ProductInfo>
+        </ProductInfoCon>
+        <Wrapper className="w100  ProductDetails">
+          <GalleryCon className="flex1 w100">
+            <Gallery />
+          </GalleryCon>
+
+          <ProductDetails className="flex aifs jcc fdc w100 flex2">
             <ProductPrice>
-              <ProductPriceLeft>
+              <ProductPriceCon>
                 <ProductPriceLeftTxt fz="35px" mb="39px" mt="20px" fw={400}>
                   Current Price
                 </ProductPriceLeftTxt>
-                <ProductPriceLeftTxt mt="10px" mb="15px" fz="19px" fw={300}>
-                  Buyer's Premium
-                </ProductPriceLeftTxt>
-                <ProductPriceLeftTxt mt="10px" mb="15px" fz="19px" fw={300}>
-                  Bid Increment (US)
-                </ProductPriceLeftTxt>
-              </ProductPriceLeft>
-              {/* <AuctionTimeHr/> */}
-              <ProductPriceRight>
-                {/* <ProductPriceRightTxtCon> */}
                 <ProductPriceLeftTxt
                   cl="#43B055"
                   fw={600}
@@ -391,14 +386,12 @@ const [slide,setSlide]=useState(0)
                 >
                   US $700.00
                 </ProductPriceLeftTxt>
-                <ProductPriceLeftTxt mt="10px" mb="10px" fz="19px">
-                  10.00%
-                </ProductPriceLeftTxt>
-                <ProductPriceLeftTxt mt="10px" mb="10px" fz="19px">
-                  $50.00
-                </ProductPriceLeftTxt>
-                {/* </ProductPriceRightTxtCon> */}
-              </ProductPriceRight>
+              </ProductPriceCon>
+
+              {/* <AuctionTimeHr/> */}
+              {/* <ProductPriceRightTxtCon> */}
+
+              {/* </ProductPriceRightTxtCon> */}
             </ProductPrice>
             <AuctionTimeHr mg="25px" wd="95%" />
 
@@ -420,7 +413,7 @@ const [slide,setSlide]=useState(0)
             </ShowContactButtonCon>
 
             <AuctionTimeHr mg="25px" wd="100%" />
-            <SocialIconCon className="flex aic jcc">
+            <SocialIconCon className="flex aic jcfs">
               <SocialIcon className="flex aic jcc" bg="#3b589b">
                 <FacebookOutlined />
               </SocialIcon>
@@ -441,30 +434,18 @@ const [slide,setSlide]=useState(0)
                 Make an offer
               </MakeAnOfferButton>
             </ShowContactButtonCon>
-            {/* <MakeOfferCon className='flex aic jcc w100 bgr' > */}
             {makeoffer && <MakeOffer setmakeoffer={setmakeoffer} />}
-            {/* </MakeOfferCon> */}
-
-            {/* <SubmitBid>
-            <SubmitBidImgCon>
-              <SubmitBidImg src={searchIcon} alt="searchIcon" />
-            </SubmitBidImgCon>
-            <InputContainer>
-              <Input placeholder="Enter Your Bid Amount" />
-            </InputContainer>
-            <SubmitBidButtonCon>
-              <SubmitBidButton>Submit A Bid</SubmitBidButton>
-            </SubmitBidButtonCon>
-          </SubmitBid> */}
-            {/* <BuyProductCon>
-            <BuyNowBtnCon>
-              <BuyBtn>BUY NOW: $4,200</BuyBtn>
-            </BuyNowBtnCon>
-          </BuyProductCon> */}
-            {/* </ProductInfoLeftCon> */}
-            {/* End Of ProductInfoLeftCon */}
-          </ProductInfoCon>
-        </ProductHomeSectionCon>
+            <DetailsCon className="flex aifs jcc w100 warp">
+              <Details>
+                <Negotiate />
+              </Details>
+              <Details>
+                <VendorDetails />
+              </Details>
+            </DetailsCon>
+          </ProductDetails>
+        </Wrapper>
+      </ProductHomeSectionCon>
       {/* )} */}
     </Container>
   );

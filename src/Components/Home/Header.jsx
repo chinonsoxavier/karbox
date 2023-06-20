@@ -14,8 +14,9 @@ const Container = styled.div`
   z-index: 100;
   position: relative;
   background: ${(props) => props.bg};
-  ${Laptop({padding:'0 4vh'})}
+  ${Laptop({ padding: "0 4vh" })}
   ${lmobile({ display: "none" })};
+  transition: 1s linear;
 `;
 const Wrapper = styled.div`
   position: sticky;
@@ -90,7 +91,7 @@ const RightText = styled.p`
      color:${(props) => props.cl};
      font-weight:${(props) => props.fw};
      width100%;
-  
+  white-space:nowrap;
      &:hover ${Accountoptions}{
       display:block;
      }
@@ -114,7 +115,7 @@ function Header({ route, bgt,bg,header }) {
   };
 
   const User={
-    user:false,
+    user:true,
     username:'chinonso',
   }
 
@@ -125,7 +126,7 @@ function Header({ route, bgt,bg,header }) {
           ? { backgroundColor:(bg) }
           : { backgroundColor: "transparent" }
       }
-      className={`${bgt ? "bgt" : "bgb"} bsbb`}
+      className={`${bgt && "bgt"  } bsbb`}
     >
       <Wrapper className={`flex aic jcsb `}>
         
@@ -232,7 +233,9 @@ function Header({ route, bgt,bg,header }) {
               </Link>
             </>
           )}
-         
+          <Link to={'./dealercenter/user/signup/dostep/step1'} className="link" style={{margin:'0 5px'}} >
+         <RightText>Become a seller</RightText>
+          </Link>
         </RightCon>
       </Wrapper>
       <Hr />

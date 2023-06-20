@@ -1,5 +1,5 @@
 import Menu1 from './Menu'
-import {Laptop, lmobile, mobile,} from '../../responsive'
+import {Laptop, lmobile, mmobile, mobile,} from '../../responsive'
 import styled from "styled-components";
 import { useLocation } from 'react-router-dom';
 import {  Menu, Search } from '@mui/icons-material';
@@ -31,7 +31,7 @@ const LogoTxt = styled.h3`
   color: ${(props) => props.cl};
   max-width: ${(props) => props.wd};
   font-weight: 700;
-  ${Laptop({ fontSize:'18px' })}
+  ${Laptop({ fontSize:'20px' })}
 `;
 
 

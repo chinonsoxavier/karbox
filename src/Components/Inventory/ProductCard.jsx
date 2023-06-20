@@ -6,15 +6,18 @@ import img2 from "../../images/nx-phev.png";
 
 const Container = styled.div`
   max-width: 380px;
+  ${CustomerBreakpoint({
+    maxWidth: "100px",
+  })};
   margin: 5px 1px;
   background-color: whitesmoke;
   background-color: #063970;
-  color:white;
-  padding-bottom:20px;
-//   flex:1;
+  color: white;
+  padding-bottom: 20px;
+  //   flex:1;
 
-  &:hover{
-    transform:scale(1.01)
+  &:hover {
+    transform: scale(1.01);
   }
 `;
   const ImageCon = styled.div`

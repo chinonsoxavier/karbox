@@ -1,10 +1,14 @@
 import styled from "styled-components";
-import Header from '../Components/Home/Header'
+import Header from "../Components/Home/Header";
 import img from "../images/team1.png";
-import {
-  AddAPhotoOutlined,
-  Print,
-} from "@mui/icons-material";
+import { AddAPhotoOutlined, Print } from "@mui/icons-material";
+import General from "../Components/Profile/General";
+import Inbox from "../Components/Profile/Inbox";
+import Chat from "../Components/Profile/Chat";
+import { Link } from "react-router-dom";
+import { CustomerBreakpoint, lmobile, tablet } from "../responsive";
+import MobileBottom from "../Components/Home/MobileBottom";
+import MobileHeader from "../Components/Home/MobileHeader";
 
 const Container = styled.div`
   width: 100%;
@@ -12,224 +16,145 @@ const Container = styled.div`
   background: #fff7f3;
 `;
 const Wrapper = styled.div`
-  background: #fff7f3;
-  padding:0 10vh;
+  padding: 0 10vh;
+  ${tablet({ padding: "0 4vh" })};
+  ${CustomerBreakpoint({padding:'0'})}
+  box-sizing: border-box;
 `;
 const HeaderCon = styled.div`
   position: sticky;
   top: 0;
   background: black;
+  padding: 0 10vh;
+  ${tablet({ padding: "0 4vh" })};
+  ${lmobile({ padding: "0 1vh" })};
 `;
 
-const MainIntro = styled.div`
-  //   background: #fff7f3;
+const SideMenuCon = styled.div`
+  flex: 1;
+  display: none;
 `;
-const MainIntroLeft = styled.div`
-  margin-right: 40px;
-  //   background:white;
+const SideMenu = styled.div`
+  background: white;
+  margin-right: 10px;
+  height: 100%;
+  box-shadow: 2px 6px 15px -8px rgba(0, 0, 0, 0.75);
 `;
-const MainIntroLeftImg = styled.img`
-  border-radius: 50%;
-  width: 110px;
-  height: 110px;
+const SideMenuHeader = styled.div`
+  margin: 10px 0;
 `;
-const MainIntroRight = styled.div`
-  background: #fff7f3;
-`;
-const MainIntroRightText = styled.span`
-  font-size: 32px;
+const SideMenuHeaderText = styled.span`
+  font-size: 34px;
   font-weight: 500;
 `;
-const MainIntroRightButton = styled.button`
-  background: ${(props) => (props.filled ? "orangered" : "none")};
-  border: ${(props) => (props.filled ? "none" : "1px solid orangered")};
-  color: ${(props) => (props.filled ? "white" : "orangered")};
-  margin: ${(props) => props.filled && "10px "};
-  padding: 10px;
-  border-radius: 4px;
-  display: flex;
-  align-items: Center;
-  justify-content: center;
-`;
-const DetailsConLeft = styled.div`
-  background: white;
-  flex: 4;
-  box-sizing: border-box;
-  border-radius: 3px;
-  box-sizing: border-box;
-  padding: 10px;
-  margin-right: 20px;
-`;
-const DetailsCon = styled.div`
-  // background: white;
-`;
-const Details = styled.div`
-  max-width: 100%;
-  width: 45%;
-  padding: 10px 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  margin: 0 15px;
-`;
-const DetailsInput = styled.input`
+
+const SideMenuTextCon = styled.div`
   width: 100%;
-  padding: 12px 7px;
-  border: 1px solid grey;
-  outline: none;
-  margin: 5px 0;
-  &::onfocus {
-    border: none;
+  padding: 7px 10px;
+  box-sizing: border-box;
+  &:hover {
+    background: #eee;
   }
 `;
-const DetailsLabel = styled.label`
-  margin: 8px 0;
+const SideMenuText = styled.span`
+  ${tablet({ fontSize: ".3rem" })}
 `;
-const ButtonCon = styled.div`
-   border:none
-   background-color:orangered;
-   padding:10px;
-   color:white;
+const ProfileRoutes = styled.div`
+  flex: 3;
 `;
-const AccountCon = styled.div``;
-const Account = styled.div`
-  flex: 1;
-  margin-right: ${(props) => props.mg};
-  background: #eee;
+
+const LinksCon = styled.div`
+  background: #ffe8e4;
+  // margin: -7px;
+`;
+const LinksTextCon = styled.div`
+  margin: 0 20px;
+  ${tablet({ margin: "0 10px" })}
   padding: 10px;
+  // background: #ffe8e4;
+  // color: #ff9584;
+  // max-width:100px;
 `;
-const AccountLeft = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-`;
-const AccountText = styled.span`
-  font-weight: 500;
-  margin: 8px 0;
-`;
-const AccountTextSm = styled.span`
-  font-size: 12px;
-  font-weight: 200;
-  line-height: 20px;
-`;
-const AccountRight = styled.div`
-  font-size: 16px;
-`;
-const AccountRightButton = styled.button`
-  cursor: pointer;
-  background: white;
-  color: ${(props) => props.cl};
-  padding: 5px;
-  border: none;
-  font-weight: 500;
+const LinksText = styled.span`
+  ${tablet({ fontSize: ".7rem" })};
+  white-space: nowrap;
 `;
 
 function Profile({ route }) {
-  return (
-    <Container>
-        <HeaderCon>
-          <Header route={route} />
-        </HeaderCon>
-      <Wrapper className='bsbb' >
-        <MainIntro className="flex aifs jcfs">
-          <MainIntroLeft>
-            <MainIntroLeftImg src={img} alt="" />
-          </MainIntroLeft>
-          <MainIntroRight className="flex aifs jcsb fdc">
-            <MainIntroRightText>Chinonso Xavier</MainIntroRightText>
-            <MainIntroRightText className="flex aic jcc">
-              <MainIntroRightButton filled className="flex aic jcc">
-                Change Avatar{" "}
-                <AddAPhotoOutlined sx={{ fontSize: 22, margin: "0 5px" }} />{" "}
-              </MainIntroRightButton>
-              <MainIntroRightButton>
-                <Print />
-              </MainIntroRightButton>
-            </MainIntroRightText>
-          </MainIntroRight>
-        </MainIntro>
-        <DetailsCon className="flex aicfsjcsb w100">
-          <DetailsConLeft className="flex aifs jcc wrap ">
-            <Details className="flex aifs jcc fdc">
-              <DetailsLabel for="name label"> Name</DetailsLabel>
-              <DetailsInput name="name lebel" defaultValue="chinonso " />
-            </Details>
-            <Details>
-              <DetailsLabel for="LastName label">Last name</DetailsLabel>
-              <DetailsInput name="LastName lebel" defaultValue=" xavier" />
-            </Details>
-            <Details>
-              <DetailsLabel for="Email label">Email</DetailsLabel>
-              <DetailsInput
-                name="Email lebel"
-                defaultValue="chinonsoxavier26@gmail.com"
-              />
-            </Details>
-            <Details>
-              <DetailsLabel for="Price label">Address</DetailsLabel>
-              <DetailsInput
-                name="Price lebel"
-                defaultValue="76 Adekeye Street "
-              />
-            </Details>
-            <Details>
-              <DetailsLabel for="Phonenumber label">Phone Number</DetailsLabel>
-              <DetailsInput
-                name="Phonenumber lebel"
-                defaultValue="08129785638"
-              />
-            </Details>
-            <ButtonCon className="aifs jcfs w100 ">
-              <MainIntroRightButton filled>SAVE CHANGES</MainIntroRightButton>
-            </ButtonCon>
-          </DetailsConLeft>
-          {/* <DetailsConRight>
-            <RightMenuCon>
-              <RightMenu className="flex aifs jcfs">
-                <PermIdentityOutlined />
-                <RightMenuText>Profile</RightMenuText>
-              </RightMenu>
-              <RightMenu className="flex aifs jcfs">
-                <PermIdentityOutlined />
-                <RightMenuText>Password</RightMenuText>
-              </RightMenu>
-              <RightMenu className="flex aifs jcfs">
-                <PermIdentityOutlined />
-                <RightMenuText>Notification</RightMenuText>
-              </RightMenu>
-            </RightMenuCon>
-          </DetailsConRight> */}
-        </DetailsCon>
+  const Links = [
+    {
+      link: "general",
+    },
+    {
+      link: "inbox",
+    },
+    {
+      link: "chats",
+    },
+    {
+      link: "close account",
+    },
+  ];
 
-        <AccountCon className="flex aic jcsb">
-          <Account className="flex aifs jcc" mg="10px">
-            <AccountLeft>
-              <AccountText>Password</AccountText>
-              <AccountTextSm>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis
-                iusto sequi quidem nobis aperiam excepturi molestias. Ipsa?
-              </AccountTextSm>
-            </AccountLeft>
-            <AccountRight>
-              <AccountRightButton cl="black">Change</AccountRightButton>
-            </AccountRight>
-          </Account>
-          <Account className="flex aifs jcc">
-            <AccountLeft>
-              <AccountText>Remove account</AccountText>
-              <AccountTextSm>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis
-                iusto sequi quidem nobis aperiam excepturi molestias. Ipsa?
-              </AccountTextSm>
-            </AccountLeft>
-            <AccountRight>
-              <AccountRightButton cl="orangered">Deactivate</AccountRightButton>
-            </AccountRight>
-          </Account>
-        </AccountCon>
+  return (
+    <Container className="s">
+      <HeaderCon>
+        {/* <MobileBottom /> */}
+        <MobileHeader />
+        <Header route={route} />
+      </HeaderCon>
+      <LinksCon className="flex aic jcc w100">
+        {Links.map((item, i) => (
+          <Link
+            key={i}
+            to={`/my-account/${item.link}`}
+            className="link"
+            style={{
+              borderBottom: route === item.link && "2px solid orangered",
+            }}
+          >
+            <LinksTextCon
+              style={
+                {
+                  // color: route === item.link && "#ff9584",
+                  // background: route === item.link && "#ffe8e4",
+                  // boxShadow:
+                  //   route === item.link &&
+                  //   "0px 0px 15px -10px rgba(0, 0, 0, 0.75)",
+                }
+              }
+            >
+              <LinksText>{item.link}</LinksText>
+            </LinksTextCon>
+          </Link>
+        ))}
+      </LinksCon>
+      <Wrapper className="flex aifs jcc w100 ">
+        <SideMenuCon>
+          <SideMenuHeader>
+            <SideMenuHeaderText>Profile settings</SideMenuHeaderText>
+          </SideMenuHeader>
+          <SideMenu>
+            <SideMenuTextCon>
+              <SideMenuText>General</SideMenuText>
+            </SideMenuTextCon>
+            <SideMenuTextCon>
+              <SideMenuText>Inbox</SideMenuText>
+            </SideMenuTextCon>
+            <SideMenuTextCon>
+              <SideMenuText>Chats</SideMenuText>
+            </SideMenuTextCon>
+            <SideMenuTextCon>
+              <SideMenuText>Close Account</SideMenuText>
+            </SideMenuTextCon>
+          </SideMenu>
+        </SideMenuCon>
       </Wrapper>
+        <ProfileRoutes className="w100 ">
+          {route === "general" && <General />}
+          {route === "inbox" && <Inbox />}
+          {route === "chats" && <Chat />}
+        </ProfileRoutes>
     </Container>
   );
 }
