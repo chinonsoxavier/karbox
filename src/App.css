@@ -1,7 +1,5 @@
 .App {
   box-sizing: border-box;
-  /* padding: 0 14vh; */
-  /* customerLinks */
 }
 ::-webkit-scrollbar-thumb {
   background-color: orangered;
